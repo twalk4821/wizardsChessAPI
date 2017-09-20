@@ -16,6 +16,13 @@ class App extends Component {
     this.updateGameMode = this.updateGameMode.bind(this)
   }
 
+  componentDidMount() {
+    let name = "diagon alley"
+    fetch(`rooms/${name}`, {
+      method: 'delete'
+    })
+  }
+
   updatePlayerNames(names) {
       this.setState({
         playerNames: names
