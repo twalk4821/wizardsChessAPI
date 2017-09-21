@@ -21,7 +21,9 @@ class Board extends Component {
 			activeSquare: null,
 			activeMoveset: null,
 			turnCount: 1,
-			lastMove: null
+			lastMove: null,
+			targetSquares: [],
+			attackSquares: []
 		}
 
 		this.toggleActive = this.toggleActive.bind(this)
@@ -59,14 +61,17 @@ class Board extends Component {
 			if (!square.props.piece) return;
 			if (!(square.props.piece.color === this.props.turn)) return;
 			this.setActiveSquare(square)
+			this.setTargetSquares(square.props.piece)
 		} else {
 			if (square.isEqualTo(activeSquare)) {
 				this.setActiveSquare(null)
+				this.clearTargetSquares()
 			} else {
 				if (!square.props.piece || square.props.piece.color !== activeSquare.props.piece.color) {
 					this.move(activeSquare.props.piece, square.props.pos)
 				} else if (square.props.piece.color === activeSquare.props.piece.color) {
 					this.setActiveSquare(square)
+					this.setTargetSquares(square.props.piece)
 				}
 			}
 		}
@@ -78,6 +83,30 @@ class Board extends Component {
 			activeMoveset: square ? square.props.piece.calculateMoveset(this.state.board) : []
 		})
 
+	}
+
+	setTargetSquares(piece) {
+		let targetSquares = [];
+		let attackSquares = [];
+		let board = this.state.board;
+		for (let move of piece.availableMoves) {
+			if (board.getPieceAtLocation(move.x, move.y)) {
+				attackSquares.push(this.refs[move.x + ',' + move.y])
+			} else {
+				targetSquares.push(this.refs[move.x + ',' + move.y])
+			}
+		}
+		this.setState({
+			targetSquares: targetSquares,
+			attackSquares: attackSquares
+		})
+	}
+
+	clearTargetSquares() {
+		this.setState({
+			targetSquares: [],
+			attackSquares: []
+		})
 	}
 
 	executeCommand(command) {
@@ -132,6 +161,7 @@ class Board extends Component {
 			piece.hasMoved = true;
 
 			this.setActiveSquare(null)
+			this.clearTargetSquares()
 			this.message.textContent = ""
 			this.setState({
 				lastMove: [piece, destination]
@@ -167,7 +197,15 @@ class Board extends Component {
 					const square = <Algebra pos= {{x:j, y:i}} key={j + "," + i}/>
 					Squares.push(square)
 				} else {
-					const square = <Square piece={this.state.board.getPieceAtLocation(j, i)} toggle={this.toggleActive} pos={{x:j, y:i}} activeSquare={this.state.activeSquare} key={j + "," + i} />
+					const square = <Square 
+									piece={this.state.board.getPieceAtLocation(j, i)} 
+									toggle={this.toggleActive} 
+									pos={{x:j, y:i}} 
+									activeSquare={this.state.activeSquare} 
+									targetSquares={this.state.targetSquares}
+									attackSquares={this.state.attackSquares}
+									key={j + "," + i} 
+									ref={j + "," + i} />
 					Squares.push(square);
 				}
 				

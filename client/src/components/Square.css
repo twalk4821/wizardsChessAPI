@@ -7,11 +7,27 @@
 }
 
 .square:nth-child(2n+1) {
-	background-color: green;
+	background-color: #FFCC00;
 }
 
 .square.active {
 	background-color: white;
+}
+
+
+
+.greyDiv {
+	background-color: grey;
+	position: relative;
+	top: 10%;
+	left: 10%;
+	width: 80%;
+	height: 80%;
+
+}
+
+.square.attack {
+	background-color: red;
 }
 
 .white {
