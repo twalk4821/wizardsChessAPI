@@ -17,10 +17,6 @@ class App extends Component {
   }
 
   componentDidMount() {
-    let name = "diagon alley"
-    fetch(`rooms/${name}`, {
-      method: 'delete'
-    })
   }
 
   updatePlayerNames(names) {
