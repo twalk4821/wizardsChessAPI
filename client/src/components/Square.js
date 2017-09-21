@@ -18,6 +18,18 @@ class Square extends Component {
 				classes = "square active " + (this.props.piece ? this.props.piece.color : "")
 			}
 		}
+
+		for (let targetSquare of this.props.targetSquares) {
+			if (targetSquare.isEqualTo(this)) {
+				classes = "square target " + (this.props.piece ? this.props.piece.color : "")
+			}
+		}
+
+		for (let attackSquare of this.props.attackSquares) {
+			if (attackSquare.isEqualTo(this)) {
+				classes = "square attack " + (this.props.piece ? this.props.piece.color : "")
+			}
+		}
 		
 		return (
 			<div className={classes} onClick={() => this.props.toggle(this)}>
@@ -29,6 +41,10 @@ class Square extends Component {
 					width="50"
 					/>
 				}
+
+				{classes === "square target " &&
+					<div className="greyDiv"></div>
+				}
 			</div>
 		)
 	}
@@ -38,6 +54,8 @@ Square.propTypes = {
 	piece: PropTypes.object,
 	activeSquare: PropTypes.object,
 	toggleActive: PropTypes.func,
+	targetSquares: PropTypes.array.isRequired,
+	attackSquares: PropTypes.array.isRequired,
 	pos: PropTypes.objectOf(PropTypes.number).isRequired
 }
 
