@@ -22,14 +22,13 @@ class GameContainer extends Component {
 		const playerName = this.state.turn === "white" ? this.props.playerNames.white : this.props.playerNames.black
 		return (
 			<div className="gameContainer">
-
-				<h2>{playerName + "'s turn."}</h2>
 				<Board 
 				ref ="board" 
 				nextTurn = {this.nextTurn} 
 				turn = {this.state.turn}
 				gameMode = {this.props.gameMode}
-				playerNames={this.props.playerNames}/>
+				playerNames={this.props.playerNames}
+				/>
 			</div>
 		)
 	}

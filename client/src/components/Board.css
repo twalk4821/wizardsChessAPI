@@ -9,6 +9,7 @@ h1,h2,h3,h4,h5 {
 	grid-template-rows: .1fr repeat(8, 1fr);
 	grid-template-columns: .5fr repeat(8, 1fr);
 	padding: 10px 5px 0px 0px;
+	border-style: solid;
 }
 
 .gameContainer h2 {
