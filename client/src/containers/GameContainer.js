@@ -19,6 +19,7 @@ class GameContainer extends Component {
 	}
 
 	render() {
+		console.log(this.props.playerColor)
 		const playerName = this.state.turn === "white" ? this.props.playerNames.white : this.props.playerNames.black
 		return (
 			<div className="gameContainer">
