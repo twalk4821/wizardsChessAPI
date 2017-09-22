@@ -16,9 +16,6 @@ class App extends Component {
     this.updateGameMode = this.updateGameMode.bind(this)
   }
 
-  componentDidMount() {
-  }
-
   updatePlayerNames(names) {
       this.setState({
         playerNames: names
