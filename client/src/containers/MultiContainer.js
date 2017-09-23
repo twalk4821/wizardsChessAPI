@@ -1,119 +1,40 @@
 import React, { Component } from 'react';
 import MultiplayerHeader from '../components/multiplayerHeader.js';
-import RaisedButton from 'material-ui/RaisedButton'; 
-import { Redirect } from 'react-router-dom';
 
 class MultiContainer extends Component {
 	constructor(props) {
 	  super(props)
 	  this.state = {
-	  	createRoomName: "Create Room",
-	  	joinRoomName: "Join Room",
-	  	redirect: false,
-	  	rooms: []
+	  	roomName: "Create Room"
 	  }
 	  //bind functions
-	  this.handleChangeCreate = this.handleChangeCreate.bind(this)
-	  this.handleChangeJoin = this.handleChangeJoin.bind(this)
-	  this.create = this.create.bind(this)
-	  this.join = this.join.bind(this)
-
+	  this.handleChange = this.handleChange.bind(this)
 	}
 
-	
-
-	componentDidMount() {
-		this.props.updatePublicGameList()
-	}
-
-	handleChangeCreate(e, color) {
+	handleChange(e, color) {
+		console.log(e.target.value, color)
 		this.setState({
-			createRoomName: e.target.value
+			roomName: e.target.value
 		})
 	}
-
-	handleChangeJoin(e, color) {
-		this.setState({
-			joinRoomName: e.target.value
-		})
-	}
-
-	create() {
-		let room = {
-			name: this.state.createRoomName,
-			users: []
-		}
-		this.props.createRoom(room)
-		this.props.joinRoom(room)
-		this.setState({
-			redirect: true
-		})
-	}
-
-	join(e) {
-		e.preventDefault()
-		let room = {
-			name: this.state.joinRoomName,
-			users: []
-		}
-		this.props.joinRoom(room)
-
-	}
-	render() {
-
+	render(){
 	  return(
-	  	<div className="multiContainer" ref="multi">
+	  	<div>
 	  	  <div className="App-header">
 	  	    <h2>Wizards Chess</h2>
 	  	  </div>
 	      <h1>Multi Player</h1>
-	      <form 
-		  	  onSubmit={this.create}
-		  	  className='formFlexbox'
-		  	>
 	      <MultiplayerHeader 
 	        type='Host'
-	        value={this.state.createRoomName}
+	        value={this.state.roomName}
 	        message='Create a gameroom and challenge opponents in public and private matches'
-	        handleChange={this.handleChangeCreate}
+	        handleChange={this.handleChange}
 	      />
-	      <RaisedButton
-			  	  label='Create' 
-			  	  type='submit'
-		  	    className='formFlexitem'
-			/>
-			</form>
-
-			<form 
-		  	  onSubmit={this.join}
-		  	  className='formFlexbox'
-		  	>
 	      <MultiplayerHeader 
 	        type='Join'
-	        value={this.state.joinRoomName}
+	        value='Enter Room'
 	        message='Join a currently open gameroom to challenge or observe'
-	        handleChange={this.handleChangeJoin}
 	      />
-	        <RaisedButton
-			  	  label='Join' 
-			  	  type='submit'
-		  	    className='formFlexitem'
-			/>
-			</form>
-
-	      <ul>
-	      	{this.props.rooms.map((room) => (
-	      		<li>
-		      		{
-		      			room.name ? room.name : room.id
-		      		}
-	      		</li>
-	      	))}
-	      </ul>
-
-	      {this.props.room && 
-	      	<Redirect to="/waiting" />
-	      }
 	    </div>
 	  )
 	}
