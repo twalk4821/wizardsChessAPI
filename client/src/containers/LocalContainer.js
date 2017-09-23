@@ -1,8 +1,13 @@
 import React, { Component } from 'react';
-import { Redirect, Link } from 'react-router-dom';
+import { Redirect, Link, withRouter } from 'react-router-dom';
 import Paper from '../components/paperCard.js';
 import RaisedButton from 'material-ui/RaisedButton'; 
 import PropTypes from 'prop-types'
+import chessBoard from '../classes/board.js'
+
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import * as Actions from '../actions';
 
 class LocalContainer extends Component {
 	constructor(props) {
@@ -43,6 +48,14 @@ class LocalContainer extends Component {
 
 		this.props.updatePlayerNames(names);
 		this.props.updateGameMode("local");
+		let board = new chessBoard();
+		board.init();
+		this.props.actions.updateGameState({
+			board: board,
+			turn: "white",
+			turnCount: 1,
+			lastMove: null
+		})
 
 		this.setState({
 			redirect: true
@@ -102,4 +115,10 @@ LocalContainer.propTypes = {
 	updatePlayerNames: PropTypes.func.isRequired
 }
 
-export default LocalContainer;
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(Actions, dispatch)
+  }
+}
+
+export default withRouter(connect(null, mapDispatchToProps)(LocalContainer));
