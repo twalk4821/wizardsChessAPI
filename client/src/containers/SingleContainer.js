@@ -57,7 +57,7 @@ class SingleContainer extends Component {
 	        black: this.state.black
 	      };
 
-		this.props.updatePlayerNames(names);
+	 	this.props.updatePlayerNames(names);
 		this.props.updateGameMode("single");
 
 		let board = new chessBoard();
@@ -66,12 +66,10 @@ class SingleContainer extends Component {
 			board: board,
 			turn: "white",
 			turnCount: 1,
-			lastMove: null
+			lastMove: null,
+			playing: true
 		})
 
-		this.setState({
-			redirect: true
-		})
 	}
 
 	render(){
@@ -117,7 +115,7 @@ class SingleContainer extends Component {
 			  	/>
 	   	  </form>
 	    
-		    {this.state.redirect &&
+		    {this.props.playing &&
 		    	<Redirect to="/game" />
 		    }
 	   </div>
@@ -130,10 +128,15 @@ SingleContainer.propTypes = {
 	updateGameMode: PropTypes.func.isRequired
 }
 
+function mapStateToProps(state) {
+	return {
+		playing: state.gameState.playing
+	}
+}
 function mapDispatchToProps(dispatch) {
   return {
     actions: bindActionCreators(Actions, dispatch)
   }
 }
 
-export default withRouter(connect(null, mapDispatchToProps)(SingleContainer));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SingleContainer));

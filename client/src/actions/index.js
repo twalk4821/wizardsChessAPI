@@ -18,7 +18,7 @@ export function updateGameMode(mode = "single") {
 
 export const UPDATE_GAME_STATE = "UPDATE_GAME_STATE";
 
-export function updateGameState(state = {board: null, turn: "white", lastMove: null, turnCount: 1}) {
+export function updateGameState(state = {board: null, turn: "white", lastMove: null, turnCount: 1, playing: false}) {
 	return {
 		type: UPDATE_GAME_STATE,
 		payload: state
