@@ -45,6 +45,11 @@ class Hud extends Component {
 			e.preventDefault()
 			return;
 		}
+
+		if (this.props.gameMode === "multi" && this.props.turn !== this.props.playerColor) {
+			e.preventDefault()
+			return;
+		}
 		
 		this.setState({
 			recording: true,
@@ -83,10 +88,17 @@ class Hud extends Component {
 	}
 
 	render() {
-		const classes = "hud" + (this.props.gameMode === "single" && 
+		let classes = "hud" + (this.props.gameMode === "single" && 
 								 this.props.turn === "black" ?
 								 " deactivated" :
 								 "")
+		if (this.props.gameMode === "multi") {
+			if (this.props.turn !== this.props.playerColor) {
+				classes = "hud deactivated"
+			} else {
+				classes = "hud"
+			}
+		}
 		
 		return (
 			<div className={classes}>

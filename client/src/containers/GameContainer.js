@@ -12,9 +12,11 @@ class GameContainer extends Component {
 		this.nextTurn = this.nextTurn.bind(this)
 	}
 
-	nextTurn() {
+	nextTurn(move) {
+		let turn = this.state.turn === "white" ? "black" : "white"
+		this.props.nextTurn(move, this.props.room)
 		this.setState({
-			turn: this.state.turn === "white" ? "black" : "white"
+			turn: turn
 		})
 	}
 
@@ -28,7 +30,9 @@ class GameContainer extends Component {
 				nextTurn = {this.nextTurn} 
 				turn = {this.state.turn}
 				gameMode = {this.props.gameMode}
+				playerColor = {this.props.playerColor}
 				playerNames={this.props.playerNames}
+				lastMove={this.props.lastMove}
 				/>
 			</div>
 		)

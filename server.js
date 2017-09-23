@@ -88,6 +88,13 @@ io.on('connection', (socket) => {
 	socket.on('start', (roomName) => {
 		io.to(roomName).emit('start')
 	})
+
+	socket.on('next', (data) => {
+		console.log('nexting', data)
+		var roomName = data.room
+		var move = data.move
+		io.to(roomName).emit('update game', move)
+	})
 })
 
 module.exports = app;
