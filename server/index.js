@@ -1,12 +1,8 @@
 var express = require('express')
 var bodyParser = require('body-parser');
-var path = require('path');
+const { resolve } = require('path');
 
-<<<<<<< HEAD
-var models = require('./db/models.js');
-=======
-var models = require('models');
->>>>>>> 160abec402337cadbc93b0334d1f64534b704153
+var models = require('../db/models.js');
 
 var port = process.env.PORT || 3001
 
@@ -15,7 +11,9 @@ var app = express();
 app.use(bodyParser.json({limit: '50mb'}));
 app.use(bodyParser.urlencoded({extended: true}));
 
-app.use('/', express.static(path.join(__dirname, '/client/public')))
+app.use(express.static(resolve(__dirname, '../src/public')));
+
+console.log('apsdfokjaspodfj', resolve(__dirname, '../src/public'));
 
 app.get('/rooms/:name', (req, res) => {
 	let Room = models.Room
