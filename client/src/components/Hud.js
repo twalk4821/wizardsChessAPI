@@ -121,29 +121,12 @@ class Hud extends Component {
 
 Hud.propTypes = {
 	playerNames: PropTypes.objectOf(PropTypes.string).isRequired,
+	gameMode: PropTypes.oneOf(['single', 'local', 'multi']).isRequired,
+	board: PropTypes.object.isRequired,
 	turn: PropTypes.oneOf(['white', 'black']).isRequired,
 	turnCount: PropTypes.number.isRequired,
-	executeCommand: PropTypes.func.isRequired,
-	lastMove: PropTypes.arrayOf(PropTypes.object),
-	gameMode: PropTypes.oneOf(["single", "local", "multi"]),
-	capturedPieces: PropTypes.shape({
-		white: PropTypes.shape({
-			rook: PropTypes.array,
-			knight: PropTypes.array,
-			bishop: PropTypes.array,
-			queen: PropTypes.array,
-			king: PropTypes.array,
-			pawn: PropTypes.array
-		}),
-		black: PropTypes.shape({
-			rook: PropTypes.array,
-			knight: PropTypes.array,
-			bishop: PropTypes.array,
-			queen: PropTypes.array,
-			king: PropTypes.array,
-			pawn: PropTypes.array
-		})
-	})
+	lastMove: PropTypes.array,
+	executeCommand: PropTypes.func.isRequired
 }
 
 function mapStateToProps(state) {

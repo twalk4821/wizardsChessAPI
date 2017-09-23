@@ -2,12 +2,13 @@ import React, { Component } from 'react';
 import { Redirect, Link, withRouter } from 'react-router-dom';
 import Paper from '../components/paperCard.js';
 import RaisedButton from 'material-ui/RaisedButton'; 
-import PropTypes from 'prop-types'
 import chessBoard from '../classes/board.js'
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as Actions from '../actions';
+
+import PropTypes from 'prop-types'
 
 class LocalContainer extends Component {
 	constructor(props) {
@@ -112,7 +113,7 @@ class LocalContainer extends Component {
 }
 
 LocalContainer.propTypes = {
-	updatePlayerNames: PropTypes.func.isRequired
+	playing: PropTypes.bool.isRequired
 }
 
 function mapStateToProps(state) {
