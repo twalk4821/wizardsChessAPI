@@ -126,8 +126,7 @@ class SingleContainer extends Component {
 }
 
 SingleContainer.propTypes = {
-	updatePlayerNames: PropTypes.func.isRequired,
-	updateGameMode: PropTypes.func.isRequired
+	playing: PropTypes.bool.isRequired
 }
 
 function mapStateToProps(state) {

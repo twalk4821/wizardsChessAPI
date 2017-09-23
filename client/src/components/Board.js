@@ -218,8 +218,11 @@ class Board extends Component {
 Board.propTypes = {
 	playerNames: PropTypes.objectOf(PropTypes.string).isRequired,
 	gameMode: PropTypes.oneOf(['single', 'local', 'multi']).isRequired,
+	board: PropTypes.object.isRequired,
 	turn: PropTypes.oneOf(['white', 'black']).isRequired,
-	nextTurn: PropTypes.func
+	turnCount: PropTypes.number.isRequired,
+	lastMove: PropTypes.array
+
 }
 
 function mapStateToProps(state) {
