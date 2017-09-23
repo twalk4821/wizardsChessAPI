@@ -208,15 +208,7 @@ class Board extends Component {
 				<div className="board">
 					{Squares}
 				</div>
-				<Hud 
-				executeCommand={this.executeCommand} 
-				turn={this.props.turn} 
-				turnCount={this.props.turnCount} 
-				capturedPieces={this.props.board.capturedPieces} 
-				playerNames={this.props.playerNames}
-				gameMode={this.props.gameMode}
-				lastMove={this.props.lastMove}
-				/>
+				<Hud executeCommand={this.executeCommand} />
 			</div>
 			</div>
 		)
