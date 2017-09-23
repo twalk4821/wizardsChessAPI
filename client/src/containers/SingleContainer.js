@@ -1,7 +1,13 @@
 import React, { Component } from 'react';
-import { Link, Redirect } from 'react-router-dom';
+import { Link, Redirect, withRouter } from 'react-router-dom';
 import Paper from '../components/paperCard.js';
 import RaisedButton from 'material-ui/RaisedButton'; 
+
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import * as Actions from '../actions';
+
+import chessBoard from '../classes/board.js'
 
 import PropTypes from 'prop-types'
 
@@ -53,6 +59,15 @@ class SingleContainer extends Component {
 
 		this.props.updatePlayerNames(names);
 		this.props.updateGameMode("single");
+
+		let board = new chessBoard();
+		board.init();
+		this.props.actions.updateGameState({
+			board: board,
+			turn: "white",
+			turnCount: 1,
+			lastMove: null
+		})
 
 		this.setState({
 			redirect: true
@@ -115,4 +130,10 @@ SingleContainer.propTypes = {
 	updateGameMode: PropTypes.func.isRequired
 }
 
-export default SingleContainer;
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(Actions, dispatch)
+  }
+}
+
+export default withRouter(connect(null, mapDispatchToProps)(SingleContainer));
