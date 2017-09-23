@@ -26,9 +26,7 @@ class App extends Component {
   }
 
   updateGameMode(mode) {
-    this.setState({
-      gameMode: mode
-    })
+    this.props.actions.updateGameMode(mode)
   }
 
   componentDidUpdate() {
