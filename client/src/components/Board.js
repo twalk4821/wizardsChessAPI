@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import './Board.css'
 
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import * as Actions from '../actions';
+
 import PropTypes from 'prop-types'
 
 import Square from './Square.js'
@@ -14,14 +18,9 @@ class Board extends Component {
 	constructor(props) {
 		super(props)
 
-		const board = new chessBoard()
-		board.init()
 		this.state = {
-			board: board,
 			activeSquare: null,
 			activeMoveset: null,
-			turnCount: 1,
-			lastMove: null,
 			targetSquares: [],
 			attackSquares: []
 		}
@@ -32,23 +31,23 @@ class Board extends Component {
 	}
 
 	componentDidMount() {
-		this.state.board.updateAvailableMoves("white")
+		this.props.board.updateAvailableMoves("white")
 	}
 
 	componentDidUpdate(prevProps) {
-		if (this.state.board.isCheck(this.props.turn)) {
-			this.state.board.isCheckmate(this.props.turn) ?
+		if (this.props.board.isCheck(this.props.turn)) {
+			this.props.board.isCheckmate(this.props.turn) ?
 				this.message.textContent = "Checkmate!!!" :
 				this.message.textContent = "Check.";
 		}
 
-		this.state.board.updateAvailableMoves(this.props.turn)
+		this.props.board.updateAvailableMoves(this.props.turn)
 
 		if (this.props.turn === "black" && 
 			prevProps.turn === "white" &&
 			this.props.gameMode === "single") {
 			setTimeout(function() {
-				let aiMove = ai.getBestMove(this.state.board, 2);
+				let aiMove = ai.getBestMove(this.props.board, 2);
 				this.move(aiMove.piece, aiMove.destination);	
 			}.bind(this), 1500)			
 		}	
@@ -80,7 +79,7 @@ class Board extends Component {
 	setActiveSquare(square) {
 		this.setState({
 			activeSquare: square,
-			activeMoveset: square ? square.props.piece.calculateMoveset(this.state.board) : []
+			activeMoveset: square ? square.props.piece.calculateMoveset(this.props.board) : []
 		})
 
 	}
@@ -88,7 +87,7 @@ class Board extends Component {
 	setTargetSquares(piece) {
 		let targetSquares = [];
 		let attackSquares = [];
-		let board = this.state.board;
+		let board = this.props.board;
 		for (let move of piece.availableMoves) {
 			if (board.getPieceAtLocation(move.x, move.y)) {
 				attackSquares.push(this.refs[move.x + ',' + move.y])
@@ -115,7 +114,7 @@ class Board extends Component {
 		const piece = command[0];
 		const pieceType = piece.charAt(0).toLowerCase() + piece.slice(1)
 
-		const livePiecesForCurrentPlayer = this.state.board.livePieces[this.props.turn];
+		const livePiecesForCurrentPlayer = this.props.board.livePieces[this.props.turn];
 
 		const location = command[2].split("");
 		const destination = {
@@ -126,8 +125,8 @@ class Board extends Component {
 		const validTargets = []
 		for (let livePiece of livePiecesForCurrentPlayer[pieceType]) {
 			const moveset = livePiece.availableMoves
-			if (this.state.board.destinationInMoveset(destination, moveset) &&
-				!this.state.board.movingIntoCheck(livePiece, destination, this.props.turn)) {
+			if (this.props.board.destinationInMoveset(destination, moveset) &&
+				!this.props.board.movingIntoCheck(livePiece, destination, this.props.turn)) {
 				validTargets.push(livePiece)
 			}
 		}
@@ -145,28 +144,28 @@ class Board extends Component {
 
 	move(piece, destination) {
 		const moveset = piece.availableMoves
-		if (this.state.board.destinationInMoveset(destination, moveset)) {
+		if (this.props.board.destinationInMoveset(destination, moveset)) {
 
-			if (this.state.board.movingIntoCheck(piece, destination, this.props.turn)) {
+			if (this.props.board.movingIntoCheck(piece, destination, this.props.turn)) {
 				this.message.textContent = "Can't move into check";
 				return false
 			}
 
-			this.state.board.move(piece, destination) 
-
-			if (this.props.turn === "black") {
-				this.incrementTurnCount()
-			}
+			this.props.board.move(piece, destination) 
 
 			piece.hasMoved = true;
 
 			this.setActiveSquare(null)
 			this.clearTargetSquares()
 			this.message.textContent = ""
-			this.setState({
-				lastMove: [piece, destination]
+
+			this.props.actions.updateGameState({
+				board: this.props.board,
+				turn: this.props.turn === "white" ? "black" : "white",
+				lastMove: [piece, destination],
+				turnCount: this.props.turn === "black" ? this.props.turnCount + 1 : this.props.turnCount
 			})
-			this.props.nextTurn()
+
 			return true	
 		}
 		else {
@@ -179,16 +178,6 @@ class Board extends Component {
 	}
 
 
-
-	incrementTurnCount() {
-		this.setState({
-			turnCount: this.state.turnCount + 1
-		})
-	}
-
-
-
-
 	render() {
 		var Squares = [];
 		for (var i = 7; i>=-1; i--) {
@@ -198,7 +187,7 @@ class Board extends Component {
 					Squares.push(square)
 				} else {
 					const square = <Square 
-									piece={this.state.board.getPieceAtLocation(j, i)} 
+									piece={this.props.board.getPieceAtLocation(j, i)} 
 									toggle={this.toggleActive} 
 									pos={{x:j, y:i}} 
 									activeSquare={this.state.activeSquare} 
@@ -211,26 +200,17 @@ class Board extends Component {
 				
 			}
 		}
+	
 		return (
-			<div>
+				<div>
 			<h2 ref={message=> {this.message = message }} className="message"> </h2>
 			<div className="playArea">
 				<div className="board">
 					{Squares}
 				</div>
-				<Hud 
-				executeCommand={this.executeCommand} 
-				turn={this.props.turn} 
-				turnCount={this.state.turnCount} 
-				capturedPieces={this.state.board.capturedPieces} 
-				playerNames={this.props.playerNames}
-				gameMode={this.props.gameMode}
-				lastMove={this.state.lastMove}
-				/>
+				<Hud executeCommand={this.executeCommand} />
 			</div>
 			</div>
-
-			
 		)
 	}
 }
@@ -238,8 +218,28 @@ class Board extends Component {
 Board.propTypes = {
 	playerNames: PropTypes.objectOf(PropTypes.string).isRequired,
 	gameMode: PropTypes.oneOf(['single', 'local', 'multi']).isRequired,
+	board: PropTypes.object.isRequired,
 	turn: PropTypes.oneOf(['white', 'black']).isRequired,
-	nextTurn: PropTypes.func
+	turnCount: PropTypes.number.isRequired,
+	lastMove: PropTypes.array
+
 }
 
-export default Board
+function mapStateToProps(state) {
+  return {
+    playerNames: state.playerNames,
+    gameMode: state.gameMode,
+    board: state.gameState.board,
+    turn: state.gameState.turn,
+    lastMove: state.gameState.lastMove,
+    turnCount: state.gameState.turnCount
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(Actions, dispatch)
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Board)

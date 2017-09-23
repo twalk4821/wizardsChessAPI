@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import './Hud.css'
 
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import * as Actions from '../actions';
+
 import PropTypes from 'prop-types'
 
 class Hud extends Component {
@@ -117,29 +121,29 @@ class Hud extends Component {
 
 Hud.propTypes = {
 	playerNames: PropTypes.objectOf(PropTypes.string).isRequired,
+	gameMode: PropTypes.oneOf(['single', 'local', 'multi']).isRequired,
+	board: PropTypes.object.isRequired,
 	turn: PropTypes.oneOf(['white', 'black']).isRequired,
 	turnCount: PropTypes.number.isRequired,
-	executeCommand: PropTypes.func.isRequired,
-	lastMove: PropTypes.arrayOf(PropTypes.object),
-	gameMode: PropTypes.oneOf(["single", "local", "multi"]),
-	capturedPieces: PropTypes.shape({
-		white: PropTypes.shape({
-			rook: PropTypes.array,
-			knight: PropTypes.array,
-			bishop: PropTypes.array,
-			queen: PropTypes.array,
-			king: PropTypes.array,
-			pawn: PropTypes.array
-		}),
-		black: PropTypes.shape({
-			rook: PropTypes.array,
-			knight: PropTypes.array,
-			bishop: PropTypes.array,
-			queen: PropTypes.array,
-			king: PropTypes.array,
-			pawn: PropTypes.array
-		})
-	})
+	lastMove: PropTypes.array,
+	executeCommand: PropTypes.func.isRequired
 }
 
-export default Hud
+function mapStateToProps(state) {
+  return {
+    playerNames: state.playerNames,
+    gameMode: state.gameMode,
+    board: state.gameState.board,
+    turn: state.gameState.turn,
+    lastMove: state.gameState.lastMove,
+    turnCount: state.gameState.turnCount
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(Actions, dispatch)
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Hud)

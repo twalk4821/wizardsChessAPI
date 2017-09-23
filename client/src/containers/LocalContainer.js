@@ -1,7 +1,13 @@
 import React, { Component } from 'react';
-import { Redirect, Link } from 'react-router-dom';
+import { Redirect, Link, withRouter } from 'react-router-dom';
 import Paper from '../components/paperCard.js';
 import RaisedButton from 'material-ui/RaisedButton'; 
+import chessBoard from '../classes/board.js'
+
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import * as Actions from '../actions';
+
 import PropTypes from 'prop-types'
 
 class LocalContainer extends Component {
@@ -35,21 +41,29 @@ class LocalContainer extends Component {
 		}	
 	}
 
-	handleSubmit() {
+	handleSubmit(e) {
+		e.preventDefault()
 		const names = {
 	        white: this.state.white,
 	        black: this.state.black
 	      };
 
-		this.props.updatePlayerNames(names);
-		this.props.updateGameMode("local");
-
-		this.setState({
-			redirect: true
+		this.props.actions.updatePlayerNames(names);
+		this.props.actions.updateGameMode("local");
+		let board = new chessBoard();
+		board.init();
+		this.props.actions.updateGameState({
+			board: board,
+			turn: "white",
+			turnCount: 1,
+			lastMove: null,
+			playing: true
 		})
+
 	}
 
 	render(){
+		console.log(this.props.playing)
 	  return(
 	  	<div>
 				<div className="App-header">
@@ -90,7 +104,7 @@ class LocalContainer extends Component {
 			  	/>
 	   	  </form>
 
-			    {this.state.redirect &&
+			  {this.props.playing &&
 		    	<Redirect to="/game" />
 		    }
 	   </div>
@@ -99,7 +113,18 @@ class LocalContainer extends Component {
 }
 
 LocalContainer.propTypes = {
-	updatePlayerNames: PropTypes.func.isRequired
+	playing: PropTypes.bool.isRequired
 }
 
-export default LocalContainer;
+function mapStateToProps(state) {
+	return {
+		playing: state.gameState.playing
+	}
+}
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(Actions, dispatch)
+  }
+}
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(LocalContainer));

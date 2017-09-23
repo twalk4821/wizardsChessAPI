@@ -1,7 +1,13 @@
 import React, { Component } from 'react';
-import { Link, Redirect } from 'react-router-dom';
+import { Link, Redirect, withRouter } from 'react-router-dom';
 import Paper from '../components/paperCard.js';
 import RaisedButton from 'material-ui/RaisedButton'; 
+
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import * as Actions from '../actions';
+
+import chessBoard from '../classes/board.js'
 
 import PropTypes from 'prop-types'
 
@@ -28,6 +34,7 @@ class SingleContainer extends Component {
   		difficulty: diff 
   	})
   }
+
 	handleChange(e, color) {
 		switch (color) {
 			case "black":
@@ -45,18 +52,26 @@ class SingleContainer extends Component {
 		}	
 	}
 
-	handleSubmit() {
+	handleSubmit(e) {
+		e.preventDefault()
 		const names = {
 	        white: this.state.white,
 	        black: this.state.black
 	      };
 
-		this.props.updatePlayerNames(names);
-		this.props.updateGameMode("single");
+	 	this.props.actions.updatePlayerNames(names);
+		this.props.actions.updateGameMode("single");
 
-		this.setState({
-			redirect: true
+		let board = new chessBoard();
+		board.init();
+		this.props.actions.updateGameState({
+			board: board,
+			turn: "white",
+			turnCount: 1,
+			lastMove: null,
+			playing: true
 		})
+
 	}
 
 	render(){
@@ -102,7 +117,7 @@ class SingleContainer extends Component {
 			  	/>
 	   	  </form>
 	    
-		    {this.state.redirect &&
+		    {this.props.playing &&
 		    	<Redirect to="/game" />
 		    }
 	   </div>
@@ -111,8 +126,18 @@ class SingleContainer extends Component {
 }
 
 SingleContainer.propTypes = {
-	updatePlayerNames: PropTypes.func.isRequired,
-	updateGameMode: PropTypes.func.isRequired
+	playing: PropTypes.bool.isRequired
 }
 
-export default SingleContainer;
+function mapStateToProps(state) {
+	return {
+		playing: state.gameState.playing
+	}
+}
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(Actions, dispatch)
+  }
+}
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SingleContainer));
