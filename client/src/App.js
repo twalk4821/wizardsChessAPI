@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
 import Routes from './Routes.js'
+import { withRouter } from 'react-router-dom';
 import './App.css';
+
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import * as Actions from './actions';
 
 class App extends Component {
   constructor(props) {
@@ -20,9 +25,7 @@ class App extends Component {
   }
 
   updatePlayerNames(names) {
-      this.setState({
-        playerNames: names
-      })
+      this.props.actions.updateNames(names)
   }
 
   updateGameMode(mode) {
@@ -48,4 +51,16 @@ class App extends Component {
   }
 }
 
-export default App;
+function mapStateToProps(state) {
+  return {
+    playerNames: state.playerNames
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(Actions, dispatch)
+  }
+}
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));

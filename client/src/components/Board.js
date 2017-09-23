@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import './Board.css'
 
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+
 import PropTypes from 'prop-types'
 
 import Square from './Square.js'
@@ -190,6 +193,7 @@ class Board extends Component {
 
 
 	render() {
+		console.log(this.props.playerNames)
 		var Squares = [];
 		for (var i = 7; i>=-1; i--) {
 			for (var j = -1; j < 8; j++) {
@@ -242,4 +246,10 @@ Board.propTypes = {
 	nextTurn: PropTypes.func
 }
 
-export default Board
+function mapStateToProps(state) {
+  return {
+    playerNames: state.playerNames.names
+  }
+}
+
+export default connect(mapStateToProps)(Board)
