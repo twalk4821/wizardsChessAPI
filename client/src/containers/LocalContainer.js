@@ -40,7 +40,8 @@ class LocalContainer extends Component {
 		}	
 	}
 
-	handleSubmit() {
+	handleSubmit(e) {
+		e.preventDefault()
 		const names = {
 	        white: this.state.white,
 	        black: this.state.black
@@ -54,15 +55,14 @@ class LocalContainer extends Component {
 			board: board,
 			turn: "white",
 			turnCount: 1,
-			lastMove: null
+			lastMove: null,
+			playing: true
 		})
 
-		this.setState({
-			redirect: true
-		})
 	}
 
 	render(){
+		console.log(this.props.playing)
 	  return(
 	  	<div>
 				<div className="App-header">
@@ -103,7 +103,7 @@ class LocalContainer extends Component {
 			  	/>
 	   	  </form>
 
-			    {this.state.redirect &&
+			  {this.props.playing &&
 		    	<Redirect to="/game" />
 		    }
 	   </div>
@@ -115,10 +115,15 @@ LocalContainer.propTypes = {
 	updatePlayerNames: PropTypes.func.isRequired
 }
 
+function mapStateToProps(state) {
+	return {
+		playing: state.gameState.playing
+	}
+}
 function mapDispatchToProps(dispatch) {
   return {
     actions: bindActionCreators(Actions, dispatch)
   }
 }
 
-export default withRouter(connect(null, mapDispatchToProps)(LocalContainer));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(LocalContainer));
