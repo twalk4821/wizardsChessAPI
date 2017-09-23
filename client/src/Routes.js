@@ -6,7 +6,6 @@ import SingleContainer from './containers/SingleContainer.js'
 import LocalContainer from './containers/LocalContainer.js'
 import MultiContainer from './containers/MultiContainer.js'
 import OptionsContainer from './containers/OptionsContainer.js'
-import WaitingContainer from './containers/WaitingContainer.js'
 
 export default (props) => (
   <Switch>
@@ -14,10 +13,6 @@ export default (props) => (
 	  	<GameContainer 
 	  	playerNames={props.playerNames}
 	  	gameMode={props.gameMode}
-	  	room={props.room}
-	  	playerColor={props.playerColor}
-	  	lastMove={props.lastMove}
-	  	nextTurn={props.nextTurn}
 	  	/>
 	  )} />
   
@@ -36,25 +31,7 @@ export default (props) => (
 	  )}/>
 
 	  <Route path="/multi" exact render={() => (
-	  	<MultiContainer 
-	  	updatePlayerNames={props.updatePlayerNames} 
-	  	updatePublicGameList={props.updatePublicGameList}
-	  	createRoom={props.createRoom}
-	  	joinRoom={props.joinRoom}
-	  	rooms={props.rooms}
-	  	room={props.room}
-	  	/>
-	  )}/>
-
-	  <Route path="/waiting" exact render={() => (
-	  	<WaitingContainer 
-	  	updatePlayerNames={props.updatePlayerNames}
-	  	updateGameMode={props.updateGameMode}
-	  	setPlayerColor={props.setPlayerColor}
-	  	playing={props.playing}
-	  	startGame={props.startGame}
- 
-	  	/>
+	  	<MultiContainer updatePlayerNames={props.updatePlayerNames} />
 	  )}/>
 
 	  <Route path="/options" exact render={() => (
