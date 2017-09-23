@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import './Hud.css'
 
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import * as Actions from '../actions';
+
 import PropTypes from 'prop-types'
 
 class Hud extends Component {
@@ -142,4 +146,21 @@ Hud.propTypes = {
 	})
 }
 
-export default Hud
+function mapStateToProps(state) {
+  return {
+    playerNames: state.playerNames,
+    gameMode: state.gameMode,
+    board: state.gameState.board,
+    turn: state.gameState.turn,
+    lastMove: state.gameState.lastMove,
+    turnCount: state.gameState.turnCount
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(Actions, dispatch)
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Hud)
