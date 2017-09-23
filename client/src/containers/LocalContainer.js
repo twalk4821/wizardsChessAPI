@@ -47,8 +47,8 @@ class LocalContainer extends Component {
 	        black: this.state.black
 	      };
 
-		this.props.updatePlayerNames(names);
-		this.props.updateGameMode("local");
+		this.props.actions.updatePlayerNames(names);
+		this.props.actions.updateGameMode("local");
 		let board = new chessBoard();
 		board.init();
 		this.props.actions.updateGameState({

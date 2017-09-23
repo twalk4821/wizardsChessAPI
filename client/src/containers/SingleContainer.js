@@ -34,6 +34,7 @@ class SingleContainer extends Component {
   		difficulty: diff 
   	})
   }
+
 	handleChange(e, color) {
 		switch (color) {
 			case "black":
@@ -51,14 +52,15 @@ class SingleContainer extends Component {
 		}	
 	}
 
-	handleSubmit() {
+	handleSubmit(e) {
+		e.preventDefault()
 		const names = {
 	        white: this.state.white,
 	        black: this.state.black
 	      };
 
-	 	this.props.updatePlayerNames(names);
-		this.props.updateGameMode("single");
+	 	this.props.actions.updatePlayerNames(names);
+		this.props.actions.updateGameMode("single");
 
 		let board = new chessBoard();
 		board.init();

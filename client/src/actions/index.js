@@ -1,8 +1,8 @@
-export const UPDATE_NAMES = "UPDATE_NAMES";
+export const UPDATE_PLAYER_NAMES = "UPDATE_PLAYER_NAMES";
 
-export function updateNames(names = {white: "Harry", black: "Draco"}) {
+export function updatePlayerNames(names = {white: "Harry", black: "Draco"}) {
 	return {
-		type: UPDATE_NAMES,
+		type: UPDATE_PLAYER_NAMES,
 		payload: names
 	}
 } 

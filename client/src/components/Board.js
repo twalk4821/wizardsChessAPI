@@ -232,8 +232,8 @@ Board.propTypes = {
 
 function mapStateToProps(state) {
   return {
-    playerNames: state.playerNames.names,
-    gameMode: state.gameMode.mode,
+    playerNames: state.playerNames,
+    gameMode: state.gameMode,
     board: state.gameState.board,
     turn: state.gameState.turn,
     lastMove: state.gameState.lastMove,
