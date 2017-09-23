@@ -16,6 +16,8 @@ export default (props) => (
 	  	gameMode={props.gameMode}
 	  	room={props.room}
 	  	playerColor={props.playerColor}
+	  	lastMove={props.lastMove}
+	  	nextTurn={props.nextTurn}
 	  	/>
 	  )} />
   

@@ -36,6 +36,13 @@ class Board extends Component {
 	}
 
 	componentDidUpdate(prevProps) {
+		if (this.props.lastMove !== this.state.lastMove) {
+			console.log(this.props.lastMove, this.state.lastMove)
+			let piece = this.props.lastMove[0];
+			let destination = this.props.lastMove[1];
+			this.move(piece, destination);
+		}
+
 		if (this.state.board.isCheck(this.props.turn)) {
 			this.state.board.isCheckmate(this.props.turn) ?
 				this.message.textContent = "Checkmate!!!" :
@@ -145,6 +152,13 @@ class Board extends Component {
 
 	move(piece, destination) {
 		const moveset = piece.availableMoves
+		if (this.props.gameMode === "multi" &&
+			this.props.turn !== this.props.playerColor) {
+			this.message.textContent = "Not your turn.";
+			this.setActiveSquare(null)
+			this.clearTargetSquares()
+			return false
+		}
 		if (this.state.board.destinationInMoveset(destination, moveset)) {
 
 			if (this.state.board.movingIntoCheck(piece, destination, this.props.turn)) {
@@ -166,7 +180,7 @@ class Board extends Component {
 			this.setState({
 				lastMove: [piece, destination]
 			})
-			this.props.nextTurn()
+			this.props.nextTurn([piece, destination])
 			return true	
 		}
 		else {
@@ -190,6 +204,7 @@ class Board extends Component {
 
 
 	render() {
+		console.log(this.props.board, this.state.board)
 		var Squares = [];
 		for (var i = 7; i>=-1; i--) {
 			for (var j = -1; j < 8; j++) {
@@ -224,6 +239,7 @@ class Board extends Component {
 				turnCount={this.state.turnCount} 
 				capturedPieces={this.state.board.capturedPieces} 
 				playerNames={this.props.playerNames}
+				playerColor={this.props.playerColor}
 				gameMode={this.props.gameMode}
 				lastMove={this.state.lastMove}
 				/>
