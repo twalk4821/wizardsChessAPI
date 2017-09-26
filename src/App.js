@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Routes from './Routes.js'
 import { withRouter } from 'react-router-dom';
-import './App.css';
+// import './App.css';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as Actions from './actions';
