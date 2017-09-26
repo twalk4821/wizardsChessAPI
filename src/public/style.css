@@ -1,0 +1,199 @@
+html, body, h1, h2, h3, h4, h5, h6, p, div, nav, aside, section, span, table, ul, li, main {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+
+  background-size: 100%;
+
+  background-blend-mode: multiply;
+  color: black;
+}
+
+.App {
+  text-align: center;
+  font-family: "bodoni 72";
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 80px;
+}
+
+.App-header {
+  background-image: url("https://t3.ftcdn.net/jpg/01/24/77/32/240_F_124773288_bmIx5Y8F1baiBLyGUbVXNt1EzZ6J0SQR.jpg");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  height: 100px;
+  padding: 20px;
+  color: white;
+  font-size: 30px;
+}
+
+.App-intro {
+  font-size: large;
+}
+
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+h2 {
+  padding: 5px;
+}
+
+/***********BOARD************/
+h1,h2,h3,h4,h5 {
+	margin: 5px;
+}
+.board {
+	width: 100%;
+	height: 100%;
+	display: grid;
+	grid-template-rows: .1fr repeat(8, 1fr);
+	grid-template-columns: .5fr repeat(8, 1fr);
+	padding: 10px 5px 0px 0px;
+}
+
+.gameContainer h2 {
+	text-align: center;
+	height: 20px;
+}
+
+
+.gameContainer {
+	padding:5px;
+}
+
+
+.br {
+	border-top-style: solid;
+}
+
+
+
+@media (min-width: 501px) {
+
+.playArea{
+	display: grid;
+	grid-template-columns: 750px 250px;
+	grid-gap: 25px
+}
+
+.board {
+	padding-right: 20px;
+	
+}
+
+}
+
+
+
+/*************SQUARES***************/
+.square img {
+	 width: 100%;
+	 height: 100%;
+}
+.square:nth-child(2n) {
+	background-color: blue;
+}
+
+.square:nth-child(2n+1) {
+	background-color: #FFCC00;
+}
+
+.square.active {
+	background-color: white;
+}
+
+.white {
+	color: white;
+}
+
+.greyDiv {
+ 	background-color: grey;
+ 	position: relative;
+ 	top: 10%;
+ 	left: 10%;
+ 	width: 80%;
+ 	height: 80%;
+ 
+ }
+ 
+ .square.attack {
+ 	background-color: red;
+ }
+
+/*ALGEBRA*/
+.algebra {
+	background-color:transparent;
+	line-height: 3;
+}
+
+/*****************HUD********************/
+h1,h2,h3,h4,h5 {
+  padding: 0;
+  margin: 0;
+}
+
+
+
+.hud {
+	float: right;
+	border-style: solid;
+	border-width: 1px;
+	overflow: hidden;
+}
+
+.hud-grid {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+}
+
+.hud-left {
+	display: flex;
+	flex-direction: column;
+	text-align: left;
+}
+
+.hud-left .turn {
+	margin-bottom: 10px;
+}
+.captured {
+	display: inline;
+}
+
+.voiceCommand {
+	color: white;
+	background-color: red;
+	border-radius: 100%;
+	width: 100px;
+	height: 100px;
+	margin-top: 20px;
+	font-size: 18px;
+	grid-row: 1 / 4;
+}
+
+.hud.deactivated .voiceCommand {
+	background-color: grey;
+}
+
+.playerName {
+	background-color: black;
+	color: white;
+}
+
+.hud-left h2 {
+	text-align: left;
+}
+
+@media (max-width: 500px) {
+	.hud{
+		width: 100%;
+	}
+}
