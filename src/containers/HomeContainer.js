@@ -6,26 +6,23 @@ class HomeContainer extends Component {
 	render() {
 		return (
 			<div className="homeContainer"> 
-
-			<div className="App-header">
-			  <h2>Wizards Chess</h2>
-			</div>
-
-			<div className="mainMenu">
-			  <div className="mainMenuItem">
-			    <Link to="/single">Single Player</Link> 
-			  </div>
-			  <div className="mainMenuItem">
-			    <Link to="/local">Localhost</Link> 
-			  </div>
-			  <div className="mainMenuItem">
-			    <Link to="/multi">Multi Player</Link> 
-			  </div>
-			  <div className="mainMenuItem">
-			    <Link to="/options">Options</Link> 
-			  </div>
-			</div>
-				
+				<div className="App-header">
+				  <h1>Wizards Chess</h1>
+				</div>
+				<div className="mainMenu">
+			    <Link to="/single" className="mainMenuItem">
+		        Single Player
+			    </Link> 
+			    <Link to="/local" className="mainMenuItem">
+		        Localhost
+			    </Link> 
+			    <Link to="/multi" className="mainMenuItem">
+		        Multi Player
+			    </Link> 
+			    <Link to="/options" className="mainMenuItem">
+		        Options
+			    </Link> 
+				</div>
 			</div>
 		)
 	}

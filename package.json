@@ -46,7 +46,8 @@
     "start": "concurrently \"npm run server\" \"npm run client\"",
     "server": "nodemon server.js",
     "client": "cd client && yarn start",
-    "web-dev": "webpack"
+    "web-dev": "webpack",
+    "build": "webpack --watch --env.dev"
   },
   "devDependencies": {
     "eslint-plugin-import": "^2.7.0",

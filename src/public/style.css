@@ -1,12 +1,17 @@
+@import url('https://fonts.googleapis.com/css?family=Saira+Semi+Condensed');
+
 html, body, h1, h2, h3, h4, h5, h6, p, div, nav, aside, section, span, table, ul, li, main {
 	margin: 0;
 	padding: 0;
 }
 
 body {
-  margin: 0;
-  padding: 0;
-  font-family: sans-serif;
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100vh;
+	width: 100vw;
+  font-family: 'Saira Semi Condensed', sans-serif;
 
   background-size: 100%;
 
@@ -25,13 +30,19 @@ body {
 }
 
 .App-header {
-  background-image: url("https://t3.ftcdn.net/jpg/01/24/77/32/240_F_124773288_bmIx5Y8F1baiBLyGUbVXNt1EzZ6J0SQR.jpg");
+  /*background-image: url("https://t3.ftcdn.net/jpg/01/24/77/32/240_F_124773288_bmIx5Y8F1baiBLyGUbVXNt1EzZ6J0SQR.jpg");*/
+  background: rgba(191, 191, 191, 0.71);
   background-size: 100% 100%;
   background-repeat: no-repeat;
-  height: 100px;
-  padding: 20px;
-  color: white;
-  font-size: 30px;
+  height: 20vh;
+  width: 100vw;
+  position: absolute;
+  top: 0;
+  left: 0;
+  /*color: white;*/
+  font-size: 4em;
+  font-family: 'Saira Semi Condensed', sans-serif;
+
 }
 
 .App-intro {
@@ -41,6 +52,16 @@ body {
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
+}
+
+a {
+	text-decoration: none;
+	color: black;
+}
+
+a:hover {
+  color: cornflowerblue;	
+  transform: 0.2s ease;
 }
 
 h2 {
@@ -196,4 +217,33 @@ h1,h2,h3,h4,h5 {
 	.hud{
 		width: 100%;
 	}
+}
+
+.mainMenu {
+	flex-direction: column;
+	justify-content: center;
+	align-content: center;
+	display: flex;
+	position: absolute;
+	height: 80vh;
+	width: 100vw;
+	left: 0;
+	top: 20vh;
+}
+
+
+.mainMenuItem {
+	border: 1px solid black;
+	background: darkslategrey;
+	flex: 1 1 auto;
+  font-family: 'Saira Semi Condensed', sans-serif;
+  font-size: 3em;
+  color: cornflowerblue;
+
+}
+
+.mainMenuItem:hover {
+	background: lightslategrey;
+	transition: 0.2s ease;
+	color: maroon;
 }
