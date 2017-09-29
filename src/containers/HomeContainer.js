@@ -17,6 +17,12 @@ class HomeContainer extends Component {
 				    <Link to="/local" className="mainMenuItem">
 			        Localhost
 				    </Link> 
+			    <Link to="/multi" className="mainMenuItem">
+		        Multi Player
+			    </Link> 
+			    <Link to="/options" className="mainMenuItem">
+		        Options
+			    </Link> 
 					</div>
 				</div>
 			</div>
@@ -26,9 +32,3 @@ class HomeContainer extends Component {
 
 
 export default HomeContainer;
-			    // <Link to="/multi" className="mainMenuItem">
-		     //    Multi Player
-			    // </Link> 
-			    // <Link to="/options" className="mainMenuItem">
-		     //    Options
-			    // </Link> 

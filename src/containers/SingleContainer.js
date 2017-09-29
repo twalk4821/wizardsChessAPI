@@ -89,6 +89,7 @@ class SingleContainer extends Component {
 		  	  onSubmit={this.handleSubmit}
 		  	  className='formFlexbox'
 		  	>
+		  	<hr />
 		  	  <Paper
 		  	    style={{backgroundColor: 'red !important'}}
 		  	    gameMode={this.state.gameMode}
@@ -115,8 +116,9 @@ class SingleContainer extends Component {
 		  	    color='black'
   	  	  />
 			  	<input
-			  	  label='Start Game' 
 			  	  type='submit'
+			  	  value='Start Game'
+			  	   
 		  	    className='formFlexitem formFlexButton'
 			  	/>
 	   	  </form>
