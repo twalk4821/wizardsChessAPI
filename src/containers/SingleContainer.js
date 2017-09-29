@@ -81,7 +81,7 @@ class SingleContainer extends Component {
 	  	<div>
 		  	<div>
 		  	  <Link to='/'>
-				  <h1 className="App-header">Wizards Chess</h1>
+					  <h1 className="App-header">Wizards Chess</h1>
 				  </Link>
 		  	</div>
 
