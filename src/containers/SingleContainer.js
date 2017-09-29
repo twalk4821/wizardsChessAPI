@@ -17,8 +17,8 @@ class SingleContainer extends Component {
 	  	white: "Harry",
 	  	black: "Draco",
 	  	difficulty: 5,
-	  	welcomeText: 'Test your skills in ${Player Mode}!',
-	  	helperText: 'Customize player names and AI difficulty below. Press start to begin.'
+	  	welcomeText: 'Test your skills in Single Player Mode!',
+	  	helperText: 'Customize player names and AI difficulty below. Press start game below to commense!'
 	  }
 	  //bind functions
 	  this.handleChange = this.handleChange.bind(this);

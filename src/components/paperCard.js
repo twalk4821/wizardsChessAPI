@@ -33,11 +33,8 @@ const paperCard = (props) => (
       {props.welcomeText && 
       	<div>
 	      	<h2>
-	      	  {props.gameMode}
-	      	</h2>
-	      	<h5>
 	      	  {props.welcomeText}
-	      	</h5>
+	      	</h2>
 	      	<h5>
 	      	  {props.helperText}
 	      	</h5>
@@ -53,13 +50,13 @@ const paperCard = (props) => (
 	          onChange={(e)=> {props.handleChange(e, `${props.color}`)}}
 	        />
 	        {props.difficulty &&
-	        	<span>
+	        	<div className='formFlexitem'>
 	        	<span>ai difficulty: {props.difficulty}
 	        	<span onClick={(e) => {props.handleDifficulty(e, '+')}}>+</span>
 	        	<span onClick={(e) => props.handleDifficulty(e, '-')}>-</span>
 
 	        	</span>
-	        	</span>
+	        	</div>
 	        }
 	      </div>
       }

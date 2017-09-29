@@ -15,7 +15,8 @@ class LocalContainer extends Component {
 	  this.state = {
 	  	white: "Harry",
 	  	black: "Draco",
-	  	welcomeText: 'Challenge a friend on your local device.  Use voice command to control the board!! Customize player names below and press start to begin.'
+	  	welcomeText: 'Challenge a friend to a 1v1 dual on your local device!',
+	  	helperText: 'Play chess like wizards! Use voice commands to control your pieces on the board and to dominate your opponent! Customize player names below and press start to begin.'
 	  }
 	  //bind functions 
 	  this.handleChange = this.handleChange.bind(this);
