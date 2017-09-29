@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Link, Redirect, withRouter } from 'react-router-dom';
 import Paper from '../components/paperCard.js';
-import RaisedButton from 'material-ui/RaisedButton'; 
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -18,7 +17,8 @@ class SingleContainer extends Component {
 	  	white: "Harry",
 	  	black: "Draco",
 	  	difficulty: 5,
-	  	welcomeText: 'Test your skills against the computer! Customize player names and AI difficulty below. Press start to begin.'
+	  	welcomeText: 'Test your skills in ${Player Mode}!',
+	  	helperText: 'Customize player names and AI difficulty below. Press start to begin.'
 	  }
 	  //bind functions
 	  this.handleChange = this.handleChange.bind(this);
@@ -71,15 +71,17 @@ class SingleContainer extends Component {
 			lastMove: null,
 			playing: true
 		})
-
 	}
 
 	render(){
+	const style = {
+	  background: 'red'
+	};
 	  return(
 	  	<div>
-		  	<div className="App-header">
+		  	<div>
 		  	  <Link to='/'>
-			  	  <h2>Wizards Chess</h2>
+				  <h1 className="App-header">Wizards Chess</h1>
 				  </Link>
 		  	</div>
 
@@ -88,32 +90,34 @@ class SingleContainer extends Component {
 		  	  className='formFlexbox'
 		  	>
 		  	  <Paper
-		  	    className='formFlexitem'
+		  	    style={{backgroundColor: 'red !important'}}
 		  	    gameMode={this.state.gameMode}
 		  	    welcomeText={this.state.welcomeText}
+		  	    helperText={this.state.helperText}
 		  	  />
 		  	  <Paper
 		  	    value={this.state.white}
 		  	    player='1'
 		  	    className='inputName'
-		  	    className='formFlexitem'
 		  	    handleChange={this.handleChange}
 		  	    color='white'
+		  	    style={style}
+		  	    className='formFlexitem'
+
 		  	  />
 		  	  <Paper 
 		  	    value={this.state.black}
 		  	    player='2'
-		  	    className='formFlexitem'
 		  	    className='inputName'
 		  	    handleChange={this.handleChange}
 		  	    difficulty={this.state.difficulty}
 		  	    handleDifficulty={this.handleDifficulty}
 		  	    color='black'
   	  	  />
-			  	<RaisedButton
+			  	<input
 			  	  label='Start Game' 
 			  	  type='submit'
-		  	    className='formFlexitem'
+		  	    className='formFlexitem formFlexButton'
 			  	/>
 	   	  </form>
 	    
