@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import chess from '../public/chess.svg'
 
 class HomeContainer extends Component {
 
@@ -12,16 +13,26 @@ class HomeContainer extends Component {
 				<div className="homeContainerItem homeContainerMenu">
 					<div className="mainMenu">
 				    <Link to="/single" className="mainMenuItem">
-			        Single Player
+			        <div>Single Player</div>
+			        <img src={chess} style={{height: '1em'}} />
 				    </Link> 
 				    <Link to="/local" className="mainMenuItem">
 			        Localhost
+			        <div>
+			        <span>
+			        <img src={chess} style={{height: '1em'}} />
+			        </span>
+			        <span>
+			        <img src={chess} style={{height: '1em'}} />
+			        </span>
+			        	
+			        </div>
 				    </Link> 
-			    <Link to="/multi" className="mainMenuItem">
+			    <Link to="/" className="mainMenuItem">
 		        Multi Player
-			    </Link> 
-			    <Link to="/options" className="mainMenuItem">
-		        Options
+			      <div>
+			        <h5>Coming Soon</h5>
+			      </div>
 			    </Link> 
 					</div>
 				</div>
@@ -32,3 +43,9 @@ class HomeContainer extends Component {
 
 
 export default HomeContainer;
+			    // <Link to="/options" className="mainMenuItem">
+		     //    Options
+			    //     <div>
+				   //      <img src={chess} style={{height: '1em'}} />
+			    //     </div>
+			    // </Link> 
