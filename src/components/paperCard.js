@@ -19,31 +19,30 @@
 
 
 import React from 'react';
-import Paper from 'material-ui/Paper';
 import TextField from 'material-ui/TextField'
 
 const style = {
-  width: 500,
-  margin: 10,
+  width: '100vh',
+  height: '100%',
   textAlign: 'center',
-  display: 'inline-block',
+  display: 'inline-block'
 };
 
 const paperCard = (props) => (
-  <div>
-    <Paper style={style} zDepth={3}>
+  <div className='formFlexitem'>
       {props.welcomeText && 
       	<div>
 	      	<h2>
-	      	  {props.gameMode}
+	      	  {props.welcomeText}
 	      	</h2>
 	      	<h5>
-	      	  {props.welcomeText}
+	      	  {props.helperText}
 	      	</h5>
+
 	      </div>
       }
       {props.value &&
-      	<div>
+      	<div className='formFlexitem'>
 	        <h4> Enter name for {props.color} </h4> 
 	      	<TextField
 	          hintText={props.value}
@@ -51,17 +50,16 @@ const paperCard = (props) => (
 	          onChange={(e)=> {props.handleChange(e, `${props.color}`)}}
 	        />
 	        {props.difficulty &&
-	        	<span>
+	        	<div className='formFlexitem'>
 	        	<span>ai difficulty: {props.difficulty}
 	        	<span onClick={(e) => {props.handleDifficulty(e, '+')}}>+</span>
 	        	<span onClick={(e) => props.handleDifficulty(e, '-')}>-</span>
 
 	        	</span>
-	        	</span>
+	        	</div>
 	        }
 	      </div>
       }
-    </Paper>
   </div>
 );
 

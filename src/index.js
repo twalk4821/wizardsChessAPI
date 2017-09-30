@@ -5,14 +5,15 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import Root from './App';
 import registerServiceWorker from './registerServiceWorker';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
 import { Provider } from 'react-redux';
 import configureStore from './store/configureStore';
 
 const store = configureStore();
 
 const App = () => (
-	  <MuiThemeProvider>
+	  <MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)}>
 	    <Root />
 	  </MuiThemeProvider>
 );	

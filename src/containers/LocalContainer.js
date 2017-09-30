@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Redirect, Link, withRouter } from 'react-router-dom';
 import Paper from '../components/paperCard.js';
-import RaisedButton from 'material-ui/RaisedButton'; 
 import chessBoard from '../classes/board.js'
 
 import { connect } from 'react-redux';
@@ -16,7 +15,8 @@ class LocalContainer extends Component {
 	  this.state = {
 	  	white: "Harry",
 	  	black: "Draco",
-	  	welcomeText: 'Challenge a friend on your local device.  Use voice command to control the board!! Customize player names below and press start to begin.'
+	  	welcomeText: 'Challenge a friend to a 1v1 dual on your local device!',
+	  	helperText: 'Play chess like wizards! Use voice commands to control your pieces on the board and to dominate your opponent! Customize player names below and press start to begin.'
 	  }
 	  //bind functions 
 	  this.handleChange = this.handleChange.bind(this);
@@ -42,15 +42,17 @@ class LocalContainer extends Component {
 
 	handleSubmit(e) {
 		e.preventDefault()
+
 		const names = {
-	        white: this.state.white,
-	        black: this.state.black
-	      };
+      white: this.state.white,
+      black: this.state.black
+    };
 
 		this.props.actions.updatePlayerNames(names);
 		this.props.actions.updateGameMode("local");
 		let board = new chessBoard();
 		board.init();
+
 		this.props.actions.updateGameState({
 			board: board,
 			turn: "white",
@@ -58,15 +60,14 @@ class LocalContainer extends Component {
 			lastMove: null,
 			playing: true
 		})
-
 	}
 
 	render(){
 	  return(
 	  	<div>
-				<div className="App-header">
+				<div>
 				  <Link to='/'>
-				  	<h2>Wizards Chess</h2>
+					  <h1 className="App-header">Wizards Chess</h1>
 					</Link>
 				</div> 
 
@@ -95,11 +96,11 @@ class LocalContainer extends Component {
 		  	    handleChange={this.handleChange}
 		  	    color='black'
   	  	  />
-			  	<RaisedButton
-			  	  label='Start Game' 
-			  	  type='submit'
-		  	    className='formFlexitem'
-			  	/>
+			 	  	<input
+			 	  	  type='submit'
+			 	  	  value='Start Game'
+			   	    className='formFlexitem formFlexButton'
+			 	  	/>
 	   	  </form>
 
 			  {this.props.playing &&

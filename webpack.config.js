@@ -8,7 +8,7 @@ module.exports = env => {
 	  	path: resolve('src/public/'),
 	  	filename: 'bundle.js',
 	  },
-	  devtool: env.pro ? 'source-map' : 'eval',
+	  devtool: env.prod ? 'source-map' : 'eval',
 	  module: {
 	  	rules: [{ 
 	  		test: /\.(jsx?)$/, 

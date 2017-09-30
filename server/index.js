@@ -11,9 +11,7 @@ var app = express();
 app.use(bodyParser.json({limit: '50mb'}));
 app.use(bodyParser.urlencoded({extended: true}));
 
-app.use(express.static(resolve(__dirname, '../src/public')));
-
-console.log('apsdfokjaspodfj', resolve(__dirname, '../src/public'));
+app.use('/', express.static(resolve(__dirname, '../src/public')));
 
 app.get('/rooms/:name', (req, res) => {
 	let Room = models.Room
@@ -36,6 +34,10 @@ app.delete('/rooms/:name', (req, res) => {
 	Room.remove({ name: 'diagon alley'})
 	.then(()=> Room.find())
 	.then((doc) => console.log(doc))
+})
+
+app.get('*', (req, res) => {
+	res.redirect('/');
 })
 
 app.listen(port, () => {
