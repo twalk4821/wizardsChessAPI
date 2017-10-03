@@ -36,8 +36,10 @@ class Board extends Component {
 
 	componentDidUpdate(prevProps) {
 		if (this.props.board.isCheck(this.props.turn)) {
-			this.props.board.isCheckmate(this.props.turn) ?
-				this.message.textContent = "Checkmate!!!" :
+			if (this.props.board.isCheckmate(this.props.turn)) {
+				this.message.textContent = "Checkmate!!!";
+				return;
+			}
 				this.message.textContent = "Check.";
 		}
 
