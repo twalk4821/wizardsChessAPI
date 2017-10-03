@@ -11,134 +11,134 @@ import chessBoard from '../classes/board.js'
 import PropTypes from 'prop-types'
 
 class SingleContainer extends Component {
-	constructor(props) {
-	  super(props)
-	  this.state = {
-	  	white: "Harry",
-	  	black: "Draco",
-	  	difficulty: 5,
-	  	welcomeText: 'Test your skills in Single Player Mode!',
-	  	helperText: 'Customize player names and AI difficulty below. Press start game below to commense!'
-	  }
-	  //bind functions
-	  this.handleChange = this.handleChange.bind(this);
-	  this.handleSubmit = this.handleSubmit.bind(this);
-	  this.handleDifficulty = this.handleDifficulty.bind(this);
-	}
-
-  handleDifficulty(e, sign){
-  	let diff = sign === '+' ? this.state.difficulty + 1 : this.state.difficulty - 1;
-
-  	this.setState({
-  		difficulty: diff 
-  	})
+  constructor(props) {
+    super(props)
+    this.state = {
+      white: 'Harry',
+      black: 'Draco',
+      difficulty: 5,
+      welcomeText: 'Test your skills in Single Player Mode!',
+      helperText: 'Customize player names and AI difficulty below. Press start game below to commense!'
+    }
+    //bind functions
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleDifficulty = this.handleDifficulty.bind(this);
   }
 
-	handleChange(e, color) {
-		switch (color) {
-			case "black":
-				this.setState({
-					black: e.target.value
-				})
-				break;
-			case "white":
-				this.setState({
-					white: e.target.value
-				})
-				break;
-			default:
-				break;
-		}	
-	}
+  handleDifficulty(e, sign){
+    let diff = sign === '+' ? this.state.difficulty + 1 : this.state.difficulty - 1;
 
-	handleSubmit(e) {
-		e.preventDefault()
-		console.log(e)
-		const names = {
-	        white: this.state.white,
-	        black: this.state.black
-	      };
+    this.setState({
+      difficulty: diff 
+    })
+  }
 
-	 	this.props.actions.updatePlayerNames(names);
-		this.props.actions.updateGameMode("single");
+  handleChange(e, color) {
+    switch (color) {
+      case "black":
+        this.setState({
+          black: e.target.value
+        });
+        break;
+      case "white":
+        this.setState({
+          white: e.target.value
+        });
+        break;
+      default:
+        break;
+    } 
+  }
 
-		let board = new chessBoard();
-		board.init();
-		this.props.actions.updateGameState({
-			board: board,
-			turn: "white",
-			turnCount: 1,
-			lastMove: null,
-			playing: true
-		})
-	}
+  handleSubmit(e) {
+    e.preventDefault()
+    console.log(e)
+    const names = {
+          white: this.state.white,
+          black: this.state.black
+        };
 
-	render(){
-	const style = {
-	  background: 'red'
-	};
-	  return(
-	  	<div>
-		  	<div>
-		  	  <Link to='/'>
-					  <h1 className="App-header">Wizards Chess</h1>
-				  </Link>
-		  	</div>
+    this.props.actions.updatePlayerNames(names);
+    this.props.actions.updateGameMode("single");
 
-		  	<form 
-		  	  onSubmit={this.handleSubmit}
-		  	  className='formFlexbox'
-		  	>
-		  	<hr />
-		  	  <Paper
-		  	    style={{backgroundColor: 'red !important'}}
-		  	    gameMode={this.state.gameMode}
-		  	    welcomeText={this.state.welcomeText}
-		  	    helperText={this.state.helperText}
-		  	  />
-		  	  <Paper
-		  	    value={this.state.white}
-		  	    player='1'
-		  	    className='inputName'
-		  	    handleChange={this.handleChange}
-		  	    color='white'
-		  	    style={style}
-		  	    className='formFlexitem'
+    let board = new chessBoard();
+    board.init();
+    this.props.actions.updateGameState({
+      board: board,
+      turn: "white",
+      turnCount: 1,
+      lastMove: null,
+      playing: true
+    })
+  }
 
-		  	  />
-		  	  <Paper 
-		  	    value={this.state.black}
-		  	    player='2'
-		  	    className='inputName'
-		  	    handleChange={this.handleChange}
-		  	    difficulty={this.state.difficulty}
-		  	    handleDifficulty={this.handleDifficulty}
-		  	    color='black'
-  	  	  />
-			  	<input
-			  	  type='submit'
-			  	  value='Start Game'
-			  	   
-		  	    className='formFlexitem formFlexButton'
-			  	/>
-	   	  </form>
-	    
-		    {this.props.playing &&
-		    	<Redirect to="/game" />
-		    }
-	   </div>
-	  )
-	}
+  render(){
+  const style = {
+    background: 'red'
+  };
+    return(
+      <div>
+        <div>
+          <Link to='/'>
+            <h1 className="App-header">Wizards Chess</h1>
+          </Link>
+        </div>
+
+        <form 
+          onSubmit={this.handleSubmit}
+          className='formFlexbox'
+        >
+        <hr />
+          <Paper
+            style={{backgroundColor: 'red !important'}}
+            gameMode={this.state.gameMode}
+            welcomeText={this.state.welcomeText}
+            helperText={this.state.helperText}
+          />
+          <Paper
+            value={this.state.white}
+            player='1'
+            className='inputName'
+            handleChange={this.handleChange}
+            color='white'
+            style={style}
+            className='formFlexitem'
+
+          />
+          <Paper 
+            value={this.state.black}
+            player='2'
+            className='inputName'
+            handleChange={this.handleChange}
+            difficulty={this.state.difficulty}
+            handleDifficulty={this.handleDifficulty}
+            color='black'
+          />
+          <input
+            type='submit'
+            value='Start Game'
+             
+            className='formFlexitem formFlexButton'
+          />
+        </form>
+      
+        {this.props.playing &&
+          <Redirect to="/game" />
+        }
+     </div>
+    )
+  }
 }
 
 SingleContainer.propTypes = {
-	playing: PropTypes.bool.isRequired
+  playing: PropTypes.bool.isRequired
 }
 
 function mapStateToProps(state) {
-	return {
-		playing: state.gameState.playing
-	}
+  return {
+    playing: state.gameState.playing
+  }
 }
 function mapDispatchToProps(dispatch) {
   return {
