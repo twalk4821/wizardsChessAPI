@@ -10,6 +10,7 @@ import PropTypes from 'prop-types'
 import Square from './Square.js'
 import Algebra from './Algebra.js'
 import Hud from '../components/Hud.js'
+import GameOver from '../components/GameOver.js'
 
 import chessBoard from '../classes/board.js'
 import ai from '../classes/ai.js'
@@ -37,7 +38,13 @@ class Board extends Component {
 	componentDidUpdate(prevProps) {
 		if (this.props.board.isCheck(this.props.turn)) {
 			if (this.props.board.isCheckmate(this.props.turn)) {
-				this.message.textContent = "Checkmate!!!";
+				this.props.actions.updateGameState({
+					board: this.props.board, 
+					turn: this.props.turn,
+					turnCount: this.props.turnCount,
+					lastMove: this.props.lastMove,
+					playing: false 
+				})
 				return;
 			}
 				this.message.textContent = "Check.";
@@ -212,6 +219,8 @@ class Board extends Component {
 				</div>
 				<Hud executeCommand={this.executeCommand} />
 			</div>
+			<GameOver turn={this.props.turn} playerNames={this.props.playerNames} />
+			
 			</div>
 		)
 	}
@@ -234,7 +243,8 @@ function mapStateToProps(state) {
     board: state.gameState.board,
     turn: state.gameState.turn,
     lastMove: state.gameState.lastMove,
-    turnCount: state.gameState.turnCount
+    turnCount: state.gameState.turnCount,
+    playing: state.gameState.playing
   }
 }
 
