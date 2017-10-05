@@ -1,12 +1,12 @@
-var express = require('express')
-var bodyParser = require('body-parser');
+const express = require('express');
+const bodyParser = require('body-parser');
 const { resolve } = require('path');
 
-var models = require('../db/models.js');
+const models = require('../db/models.js');
 
-var port = process.env.PORT || 3001
+const port = process.env.PORT || 3001
 
-var app = express();
+const app = express();
 
 app.use(bodyParser.json({limit: '50mb'}));
 app.use(bodyParser.urlencoded({extended: true}));

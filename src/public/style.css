@@ -4,26 +4,24 @@ html, body, h1, h2, h3, h4, h5, h6, p, div, nav, aside, section, span, table, ul
 	margin: 0;
 	padding: 0;
 }
+
 html {
-	position: absolute;
+	position: fixed;
 	top: 0;
 	left: 0;
 	height: 100vh;
 	width: 100vw;
 	font-family: 'Germania One', cursive;
-
   background-size: 100%;
   background-image: url("https://wallpapercave.com/wp/baUGRjh.jpg") ;
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
-	
 }
-body {
 
+body {
   background-blend-mode: multiply;
   color: black;
-
 }
 
 .App {
@@ -45,10 +43,10 @@ body {
   text-stroke: 1px #03020f;
 }
 @media screen and (max-width: 400px) {
-  .App-header {
-  	font-size: 3.5em;
-  	}
-  }
+.App-header {
+	font-size: 3.5em;
+	}
+}
 
 .gameplayHeader{
 	background-image: url("https://i.pinimg.com/originals/0a/d5/4e/0ad54eba6c4f66c213dfa2ac7ec6ddaf.jpg");
@@ -78,51 +76,67 @@ h2 {
 }
 
 /***********BOARD************/
-h1,h2,h3,h4,h5 {
-	margin: 5px;
+
+.playArea {
+	position: relative;
+	height: 100vh;
+	width: 100vw;
+	display: grid;
+	grid-template-columns: 63vw 37vw;
+	/*grid-gap: 25px*/
 }
+
+@media screen and (max-width: 701px) {
+  .playArea {
+  	grid-template-columns: 1fr;
+  	grid-template-rows: 63vh 37vh;
+  }
+  .board {
+  	height: 63vh;
+  }
+  .hud {
+  	/*top: 63vh;*/
+  	height: 37vh;
+  	/*width: 100vw;*/
+  	/*left: 0;*/
+  }
+
+}
+
 .board {
-	width: 100%;
 	height: 100%;
 	display: grid;
 	grid-template-rows: .1fr repeat(8, 1fr);
 	grid-template-columns: .5fr repeat(8, 1fr);
-	padding: 10px 5px 0px 0px;
+	background: rgba(30, 29, 61, 0.53);
 }
+
+.boardWrapper {
+
+}
+
+
 
 .gameContainer h2 {
 	text-align: center;
 	height: 20px;
 }
 
-
 .gameContainer {
-	padding:5px;
 }
-
 
 .br {
 	border-top-style: solid;
 }
 
 
-
 @media (min-width: 501px) {
-
-.playArea{
-	display: grid;
-	grid-template-columns: 750px 250px;
-	grid-gap: 25px
+	.playArea{
+	}
+	.board {
+		padding-right: 20px;
+	}
 }
-
-.board {
-	padding-right: 20px;
-	
-}
-
-}
-
-
 
 /*************SQUARES***************/
 .square img {
@@ -152,7 +166,6 @@ h1,h2,h3,h4,h5 {
  	left: 10%;
  	width: 80%;
  	height: 80%;
- 
  }
  
  .square.attack {
@@ -161,8 +174,12 @@ h1,h2,h3,h4,h5 {
 
 /*ALGEBRA*/
 .algebra {
-	background-color:transparent;
-	line-height: 3;
+	/*line-height: 3;*/
+	color: white;
+	/*font-size: 2em;*/
+  font-family: 'Germania One', cursive;
+  -webkit-text-stroke: 0.5px #03020f;
+  text-stroke: 0.5px #03020f;
 }
 
 /*****************HUD********************/
@@ -171,18 +188,29 @@ h1,h2,h3,h4,h5 {
   margin: 0;
 }
 
-
-
 .hud {
+	border: ;
 	float: right;
-	border-style: solid;
-	border-width: 1px;
 	overflow: hidden;
+	background: rgba(30, 29, 61, 0.53);
+	color: white;
+	font-size: 1.5em;
+	font-family: 'Germania One', cursive;
+	-webkit-text-stroke: 0.5px #03020f;
+	text-stroke: 0.5px #03020f;
+	/*padding: 0.5em;*/
+}
+
+@media screen and (max-width: 701px) {
+	.hud {
+		font-size: 1em;
+	}
 }
 
 .hud-grid {
 	display: grid;
-	grid-template-columns: 1fr 1fr;
+	grid-template-columns: 2fr 1fr;
+	padding: 0em 1em;
 }
 
 .hud-left {
@@ -202,12 +230,21 @@ h1,h2,h3,h4,h5 {
 	color: white;
 	background-color: red;
 	border-radius: 100%;
-	width: 100px;
-	height: 100px;
-	margin-top: 20px;
-	font-size: 18px;
+	width: 2em;
+	height: 2em;
+	/* margin-top: 20px; */
+	font-size: 2em;
 	grid-row: 1 / 4;
 }
+
+color: white;
+background-color: red;
+border-radius: 100%;
+width: 2em;
+height: 2em;
+/* margin-top: 20px; 
+font-size: 2em;
+grid-row: 1 / 4;*/
 
 .hud.deactivated .voiceCommand {
 	background-color: grey;
@@ -235,16 +272,15 @@ h1,h2,h3,h4,h5 {
 	/*display: flex;*/
 	width: 100vw;
 	display: -webkit-flex;
-	 display: flex;
-	 -webkit-flex-direction: column; 
-	 flex-direction: column;
-	 -webkit-align-items: stretch;
-	 align-items: stretch;
-	 -webkit-justify-content: center;
-	 justify-content: center;
-	 /*border: 10px solid black;*/
-	 height: 100%;
-	 position: relative;
+	display: flex;
+	-webkit-flex-direction: column; 
+	flex-direction: column;
+	-webkit-align-items: stretch;
+	align-items: stretch;
+	-webkit-justify-content: center;
+	justify-content: center;
+	height: 100%;
+	position: relative;
 }
 
 
@@ -303,9 +339,9 @@ h1,h2,h3,h4,h5 {
   text-stroke: 0.5px #03020f;
 }
 input.formFlexitem.formFlexButton {
-    background: #181737;
-    color: #9adfe2;
-    font-size: 3em;
+  background: #181737;
+  color: #9adfe2;
+  font-size: 3em;
 }
 input.formFlexitem.formFlexButton:hover {
 	transition: 0.2s ease;
@@ -314,50 +350,40 @@ input.formFlexitem.formFlexButton:hover {
 }
 
 .homeContainer {
-	/*border: 2px solid aqua;*/
 	height: 100vh;
 	width: 100vw;
-	/*display: flex;*/
 	position: fixed;
-	/*display: -webkit-flex;*/
-	 /*display: flex;*/
-	 /*-webkit-flex-direction: column;*/
-	 /*flex-direction: column;*/
-	 /*-webkit-align-items: stretch;*/
-	 /*align-items: stretch;*/
-	 /*-webkit-justify-content: center;*/
-	 /*justify-content: center;*/
 }
 
 .homeContainerItem {
 	flex: auto;
-	/*border: 5px dashed green;*/
 	width: 100vw;
 	height: 100%;
 	display: block;
 }
 
 .homeContainerHeader {
-	/*border: 4px solid gold;*/
-	/*flex: 1 1 auto;*/
 	height: 30vh;
 	width: 100vw;
 }
 
 .homeContainerMenu {
-	/*border: 8px solid purple;*/
-	/*flex: 5 3 auto;*/
 	height: 70vh;
 	width: 100vw;
 }
 
 h1.App-header {
-    top: 5vh;
-    position: relative;
+  top: 5vh;
+  position: relative;
 }
 
 h1.App-header:hover {
   transition: 0.2s ease;
   size: 5em;
+}
 
+div#root {
+  position: relative;
+  top: 0;
+  left: 0;
 }
