@@ -27,6 +27,7 @@ class Board extends Component {
     this.toggleActive = this.toggleActive.bind(this)
     this.setActiveSquare = this.setActiveSquare.bind(this)
     this.executeCommand = this.executeCommand.bind(this)
+    this.startOver = this.startOver.bind(this)
   }
 
   componentDidMount() {
@@ -35,8 +36,17 @@ class Board extends Component {
 
   componentDidUpdate(prevProps) {
     if (this.props.board.isCheck(this.props.turn)) {
-      this.props.board.isCheckmate(this.props.turn) ?
-        this.message.textContent = "Checkmate!!!" :
+      if (this.props.board.isCheckmate(this.props.turn)) {
+        this.message.textContent = "Checkmate!!!";
+        this.props.actions.updateGameState({
+          board: this.props.board,
+          turn: this.props.turn,
+          lastMove: this.props.lastMove,
+          turnCount: this.props.turnCount,
+          playing: false
+        })
+
+      }
         this.message.textContent = "Check.";
     }
 
@@ -50,6 +60,18 @@ class Board extends Component {
         this.move(aiMove.piece, aiMove.destination);  
       }.bind(this), 1500)     
     } 
+  }
+
+  startOver() {
+    const board = new chessBoard()
+    board.init()
+    this.props.actions.updateGameState({
+      board: board,
+      turn: "white",
+      lastMove: null,
+      turnCount: 1,
+      playing: true
+    })
   }
 
   toggleActive(square) {
@@ -163,7 +185,8 @@ class Board extends Component {
         board: this.props.board,
         turn: this.props.turn === "white" ? "black" : "white",
         lastMove: [piece, destination],
-        turnCount: this.props.turn === "black" ? this.props.turnCount + 1 : this.props.turnCount
+        turnCount: this.props.turn === "black" ? this.props.turnCount + 1 : this.props.turnCount,
+        playing: true
       })
 
       return true 
@@ -214,7 +237,9 @@ class Board extends Component {
             <Hud executeCommand={this.executeCommand} />
           </div>
         </div>
-        <GameOver turn={this.props.turn} playerNames={this.props.playerNames} />
+        {!this.props.playing &&
+          <GameOver startOver={this.startOver} />
+        }
       </div>
     )
   }
