@@ -96,7 +96,9 @@ class Hud extends Component {
 				<div className="hud-grid">
 					<div className="hud-left">
 						<h1>{this.props.playerNames[this.props.turn]}</h1>
-						<h4>Last Move: {this.props.lastMove ? this.convertMoveToAlgebraic() : ""}</h4>
+						<h4>Last Move: {this.props.lastMove ? 
+							this.props.lastMove.length === 1 ? this.props.lastMove[0] :
+							this.convertMoveToAlgebraic() : ""}</h4>
 						<h4 className="turn">Turn: {this.props.turnCount}</h4>		
 						<div>{this.state.message}</div>
 					</div>

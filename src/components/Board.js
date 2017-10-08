@@ -12,6 +12,7 @@ import GameOver from '../components/GameOver.js'
 
 import chessBoard from '../classes/board.js'
 import ai from '../classes/ai.js'
+import Vector from '../classes/math.js'
 
 class Board extends Component {
   constructor(props) {
@@ -172,6 +173,11 @@ class Board extends Component {
         return false
       }
 
+      if (this.isCastle(piece, destination)) {
+        this.handleCastle(piece, destination);
+        return;
+      }
+
       this.props.board.move(piece, destination) 
 
       piece.hasMoved = true;
@@ -200,6 +206,41 @@ class Board extends Component {
 
   }
 
+  isCastle(piece, destination) {
+    return piece.type === "king" && Math.abs(Vector.subtract(destination, piece.pos).x) === 2
+  }
+
+  handleCastle(king, destination) {
+    let backRowPosition = king.color === "white" ? 0 : 7;
+    let kingSideCastle = destination.x === 6 ? true : false;
+    let rookPosition = {
+      x: kingSideCastle ? 7 : 0,
+      y: backRowPosition
+    };
+    let rook = this.props.board.getPieceAtLocation(rookPosition.x, rookPosition.y);
+    let rookDestination = {
+      x: kingSideCastle ? 5 : 3,
+      y: backRowPosition
+    };
+    this.props.board.movePieceToLocation(king, destination.x, backRowPosition);
+    this.props.board.movePieceToLocation(rook, rookDestination.x, backRowPosition);
+
+    king.hasMoved = true;
+    rook.hasMoved = true;
+
+    this.setActiveSquare(null)
+    this.clearTargetSquares()
+
+    this.message.textContent = ""
+
+    this.props.actions.updateGameState({
+        board: this.props.board,
+        turn: this.props.turn === "white" ? "black" : "white",
+        lastMove: [kingSideCastle ? "King side castle" : "Queen side castle"],
+        turnCount: this.props.turn === "black" ? this.props.turnCount + 1 : this.props.turnCount,
+        playing: true
+    })
+  }
 
   render() {
     var Squares = [];
