@@ -48,10 +48,17 @@ class Board extends Component {
           turnCount: this.props.turnCount,
           playing: false
         })
-        
+
+      if (this.props.gameMode === "single") {
+        if (this.props.turn !== "black") {
+          return
+        }
+      }  
+
       let rockets = this.refs.svg.contentDocument.querySelectorAll('.rockets')
       let { innerHeight, innerWidth } = window
       fireRockets(rockets, innerHeight, innerWidth)
+      
       return
       }
         this.message.textContent = "Check.";
@@ -315,7 +322,8 @@ function mapStateToProps(state) {
     turn: state.gameState.turn,
     lastMove: state.gameState.lastMove,
     turnCount: state.gameState.turnCount,
-    playing: state.gameState.playing
+    playing: state.gameState.playing,
+    playerColor: state.playerColor
   }
 }
 
