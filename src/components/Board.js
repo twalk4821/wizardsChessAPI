@@ -9,10 +9,12 @@ import Square from './Square.js'
 import Algebra from './Algebra.js'
 import Hud from '../components/Hud.js'
 import GameOver from '../components/GameOver.js'
+import rockets from '../public/rockets.svg'
 
 import chessBoard from '../classes/board.js'
 import ai from '../classes/ai.js'
 import Vector from '../classes/math.js'
+import fireRockets from '../classes/rockets.js'
 
 class Board extends Component {
   constructor(props) {
@@ -46,7 +48,11 @@ class Board extends Component {
           turnCount: this.props.turnCount,
           playing: false
         })
-
+        
+      let rockets = this.refs.svg.contentDocument.querySelectorAll('.rockets')
+      let { innerHeight, innerWidth } = window
+      fireRockets(rockets, innerHeight, innerWidth)
+      return
       }
         this.message.textContent = "Check.";
     }
@@ -243,6 +249,7 @@ class Board extends Component {
   }
 
   render() {
+    
     var Squares = [];
     for (var i = 7; i>=-1; i--) {
       for (var j = -1; j < 8; j++) {
@@ -281,6 +288,10 @@ class Board extends Component {
         {!this.props.playing &&
           <GameOver startOver={this.startOver} />
         }
+        <div className="rockets">
+        <object data="rockets.svg" type="image/svg+xml"
+           ref="svg" width="100%" height="100%"></object> 
+        </div>
       </div>
     )
   }

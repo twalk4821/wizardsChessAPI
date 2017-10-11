@@ -1,13 +1,14 @@
 const svg = document.querySelector('#svg');
 // svg.addEventListener('load', fireRockets)
+import {TimelineMax} from 'gsap'
 
 
-function fireRockets() {
-	const rocketBundle = svg.contentDocument.querySelectorAll('.rockets');
+function fireRockets(rocketBundle, windowHeight, windowWidth) {
+	// const rocketBundle = svg.contentDocument.querySelectorAll('.rockets');
 
 	const tl = new TimelineMax({delay: .5});
 
-	let radius, center, rocket, i, j
+	let radius, theta, x, y, r, center, rocket, i, j
 	for (i = 0; i<rocketBundle.length; i++) {
 		rocket = rocketBundle[i].children;
 		radius = getRadius();
@@ -18,7 +19,6 @@ function fireRockets() {
 		let fill = '#'+(Math.random()*0xFFFFFF<<0).toString(16);
 		tl.to(rocket, .01, {fill, opacity:100}, "color" + i)
 
-		let x, y, theta, r;
 		let coin = Math.random();
 		coin > .5 ? heart() : generic();
 		
@@ -29,13 +29,13 @@ function fireRockets() {
 	
 
 	function getRadius() {
-		return 100 + Math.random()*100;
+		return 1/6*windowWidth + Math.random()*1/7*windowWidth;
 	}
 
 	function getCenter() {
 		return {
-			x: 75*Math.random() - 75*Math.random(),
-			y: -250 - 125*Math.random()
+			x: Math.random()*3/4*windowWidth - windowWidth/2,
+			y: -3/4*windowHeight - 1/4*Math.random()*windowHeight
 		};
 	}
 
