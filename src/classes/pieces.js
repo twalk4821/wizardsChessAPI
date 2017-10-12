@@ -232,6 +232,107 @@ class King extends Piece {
 		this.range = 1
 	}
 
+	calculateMoveset(board) {
+		const moveset = []
+		for (var i = 0; i<this.moveset.length; i++) {
+			for (var j = 0; j<this.range; j++) {
+				const move = this.moveset[i];
+				
+				const movementVector = Piece.moveAsVector(move);
+				const positionVector = Vector.add(new Vector(this.pos.x, this.pos.y), Vector.times(movementVector, j))
+				const newLocation = Vector.add(positionVector, movementVector)
+				if (!Piece.onBoard(newLocation)) {
+					break;
+				}
+				
+
+				if (board.getPieceAtLocation(newLocation.x, newLocation.y)) {
+					let piece = board.getPieceAtLocation(newLocation.x, newLocation.y)
+
+					if (piece.color === this.color) {
+						break;
+					} else {
+						moveset.push({
+							x: newLocation.x,
+							y: newLocation.y
+						})
+						break;
+					}
+
+				} 
+
+				if (Piece.onBoard(newLocation)) {
+					moveset.push({
+						x: newLocation.x,
+						y: newLocation.y
+					})
+				}
+			}
+		}
+
+		//handle castle
+		//king side
+		if (this.canKingSideCastle(board)) {
+			let backRowPosition = this.color === "white" ? 0 : 7;
+			moveset.push({
+				x: 6,
+				y: backRowPosition
+			})
+		}
+
+		//queen side
+		if (this.canQueenSideCastle(board)) {
+			let backRowPosition = this.color === "white" ? 0 : 7;
+			moveset.push({
+				x: 2,
+				y: backRowPosition
+			})
+			console.log(moveset)
+		}
+		return moveset
+	}
+
+	canKingSideCastle(board) {
+		if (!this.hasMoved) {
+			let backRowPosition = this.color === "white" ? 0 : 7;
+			let rookPosition = { x: 7, y: backRowPosition }
+			let rook = board.getPieceAtLocation(rookPosition.x, rookPosition.y)
+			if (rook) {
+				if (!rook.hasMoved) {
+					let bishopPosition = { x: 5, y: backRowPosition }
+					let knightPosition = { x: 6, y: backRowPosition }
+					if (!board.getPieceAtLocation(bishopPosition.x, bishopPosition.y) &&
+							!board.getPieceAtLocation(knightPosition.x, knightPosition.y)) {
+						return true;
+					}
+				}
+			}
+		}
+		return false;
+	}
+
+	canQueenSideCastle(board) {
+		if (!this.hasMoved) {
+			let backRowPosition = this.color === "white" ? 0 : 7;
+			let rookPosition = { x: 0, y: backRowPosition }
+			let rook = board.getPieceAtLocation(rookPosition.x, rookPosition.y)
+			if (rook) {
+				if (!rook.hasMoved) {
+					let queenPosition = { x: 3, y: backRowPosition }
+					let bishopPosition = { x: 2, y: backRowPosition }
+					let knightPosition = { x: 1, y: backRowPosition }
+					console.log(!board.getPieceAtLocation(bishopPosition.x, bishopPosition.y) &&
+											!board.getPieceAtLocation(knightPosition.x, knightPosition.y))
+					if (!board.getPieceAtLocation(queenPosition.x, queenPosition.y) &&
+							!board.getPieceAtLocation(bishopPosition.x, bishopPosition.y) &&
+							!board.getPieceAtLocation(knightPosition.x, knightPosition.y)) {
+						return true;
+					}
+				}
+			}
+		}
+		return false;
+	}
 
 }
 
