@@ -24,3 +24,12 @@ export function updateGameState(state = {board: null, turn: "white", lastMove: n
 		payload: state
 	}
 }
+
+export const UPDATE_PLAYER_COLOR = "UPDATE_PLAYER_COLOR";
+
+export function updatePlayerColor(color = "white") {
+	return {
+		type: UPDATE_PLAYER_COLOR,
+		payload: color
+	}
+}
