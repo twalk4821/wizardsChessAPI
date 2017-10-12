@@ -1,7 +1,14 @@
-		let capturedWhite = this.props.capturedPieces["white"]
-		let capturedBlack = this.props.capturedPieces["black"]
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import images from '../assets/images';
+
+import PropTypes from 'prop-types'
+
+const Captured = (props) => {
+	let { capturedWhite, capturedBlack } = props
+	return (
 <div>
-					<div className="playerName">{this.props.playerNames.white + " (White)"}</div>
+					<div className="playerName">{props.playerNames.white + " (White)"}</div>
 					<ul>
 					{capturedWhite && capturedWhite["pawn"].length>0 &&
 
@@ -51,7 +58,7 @@
 					
 					</ul>
 					
-					<div className="playerName">{this.props.playerNames.black + " (Black)"}</div>
+					<div className="playerName">{props.playerNames.black + " (Black)"}</div>
 					<ul>
 					{capturedBlack && capturedBlack["pawn"].length>0 &&
 						capturedBlack["pawn"].map((pawn) => (
@@ -91,3 +98,23 @@
 					</ul>
 
 				</div>
+	)
+}
+
+Captured.propTypes = {
+	playerNames: PropTypes.objectOf(PropTypes.string).isRequired,
+	turn: PropTypes.string.isRequired,
+	capturedBlack: PropTypes.object.isRequired,
+	capturedWhite: PropTypes.object.isRequired
+}
+
+function mapStateToProps(state) {
+	return {
+		capturedBlack: state.gameState.board.capturedPieces.black,
+		capturedWhite: state.gameState.board.capturedPieces.white,
+		playerNames: state.playerNames,
+		turn: state.gameState.turn
+	}
+}
+
+export default connect(mapStateToProps)(Captured);

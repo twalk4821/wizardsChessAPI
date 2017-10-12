@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as Actions from '../actions';
 
+import Captured from './Captured.js'
+
 import PropTypes from 'prop-types'
 
 class Hud extends Component {
@@ -114,7 +116,7 @@ class Hud extends Component {
 						}
 					</div>
 				</div>
-				<div></div>
+				<Captured />
 			</div>
 		)
 	}
