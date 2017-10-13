@@ -19,14 +19,26 @@ html {
   background-size: cover;
 }
 
+h2 {
+	font-size: 3em;
+}
+h4 {
+	font-size: 2em;
+}
+h5 {
+	font-size: 1.4em;
+}
 body {
   background-blend-mode: multiply;
   color: black;
 }
 
 .App {
-  text-align: center;
-  font-family: 'Germania One', cursive;
+	text-align: center;
+	background: rgba(0, 0, 0, 0.25);
+	height: 100vh;
+	width: 100vw;
+	font-family: 'Germania One', cursive;
 }
 
 .App-logo {
@@ -300,8 +312,9 @@ grid-row: 1 / 4;*/
 	flex-direction: column;
 	justify-content: center;
 	align-content: center;
+	width: 80vw;
+	left: 10vw;
 	/*display: flex;*/
-	width: 100vw;
 	display: -webkit-flex;
 	display: flex;
 	-webkit-flex-direction: column; 
@@ -310,8 +323,10 @@ grid-row: 1 / 4;*/
 	align-items: stretch;
 	-webkit-justify-content: center;
 	justify-content: center;
-	height: 100%;
 	position: relative;
+	background: rgba(24, 23, 55, 0.85);
+	color: #9adfe2;
+	font-size: 3em;
 }
 
 
@@ -319,37 +334,38 @@ grid-row: 1 / 4;*/
 	flex: 1 1 auto;
 	font-family: 'Germania One', cursive;
   color: #9ADFE2;
-  font-size: 4em;
+  font-size: 1.5em;
   font-family: 'Germania One', cursive;
   -webkit-text-stroke: 2.5px #03020f;
   text-stroke: 2.5px #03020f;
-	border: 1px solid #9ADFE2;
+	border: 1px solid rgba(154, 223, 226, 0.4);
 }
 
 @media screen and (max-width: 450px) {
 	.mainMenuItem {
-		font-size: 3em;
+		font-size: 1em;
 		text-stroke: 1px #03020f;
 		-webkit-text-stroke: 1px #03020f;
 	}
 }
 
 .mainMenuItem:hover {
-	background: rgba(228, 207, 207, 0.21);
-	transition: 0.2s ease;
-	color: maroon;
-}
+	/*background: rgba(228, 207, 207, 0.21);*/
+	/*color: maroon;*/
+  transition: 0.2s ease;
+  background: rgba(154, 223, 226, 0.80);
+  color: #181737;
+  -webkit-text-stroke: 2.5px #99dfe2;
+  }
 
 .formFlexbox {
-	background: rgba(24, 23, 55, 0.35);
+	background: rgba(24, 23, 55, 0.8);
 	position: absolute;
 	top: 20vh;
-	left: 0;
-	width: 90vw;
+	left: 10vh;
+	width: 80vw;
 	margin: 0 auto;
 	height: 70vh;
-	margin: 2.5vh 2.5vw;
-	padding: 2.5vh 2.5vw;
 	display: flex;
 	flex-direction: column;
 	display: block;
@@ -364,7 +380,7 @@ grid-row: 1 / 4;*/
 
 .formFlexitem {
 	flex: auto;
-  font-size: 1.5em;
+  /*font-size: 1.5em;*/
   font-family: 'Germania One', cursive;
   -webkit-text-stroke: 0.5px #03020f;
   text-stroke: 0.5px #03020f;
@@ -373,6 +389,7 @@ input.formFlexitem.formFlexButton {
   background: #181737;
   color: #9adfe2;
   font-size: 3em;
+  border: 1px solid #9adfe2;
 }
 input.formFlexitem.formFlexButton:hover {
 	transition: 0.2s ease;

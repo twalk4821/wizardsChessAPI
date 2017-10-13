@@ -31,7 +31,7 @@ class HomeContainer extends Component {
 			    <Link to="/" className="mainMenuItem">
 		        Multi Player
 			      <div>
-			        <h5>Coming Soon</h5>
+			        <h6>Coming Soon</h6>
 			      </div>
 			    </Link> 
 					</div>
