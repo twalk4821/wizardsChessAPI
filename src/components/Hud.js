@@ -115,7 +115,7 @@ class Hud extends Component {
 					<div className="voice">
 						{!this.state.recording && 
 							<form onSubmit={this.startRecording}>
-								<div className="message">{this.state.message}</div>
+								<div className="message">{this.props.message}</div>
 								<input className="voiceCommand" type="submit" value=""/>
 								<h4>Voice Command</h4>
 							</form>
@@ -147,7 +147,8 @@ function mapStateToProps(state) {
     board: state.gameState.board,
     turn: state.gameState.turn,
     lastMove: state.gameState.lastMove,
-    turnCount: state.gameState.turnCount
+    turnCount: state.gameState.turnCount,
+    message: state.message
   }
 }
 

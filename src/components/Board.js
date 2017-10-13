@@ -40,7 +40,7 @@ class Board extends Component {
   componentDidUpdate(prevProps) {
     if (this.props.board.isCheck(this.props.turn)) {
       if (this.props.board.isCheckmate(this.props.turn)) {
-        this.message.textContent = "Checkmate!!!";
+        this.props.actions.updateMessage("Checkmate!!!");
         this.props.actions.updateGameState({
           board: this.props.board,
           turn: this.props.turn,
@@ -61,7 +61,7 @@ class Board extends Component {
       
       return
       }
-        this.message.textContent = "Check.";
+        this.props.actions.updateMessage("Check.");
     }
 
     this.props.board.updateAvailableMoves(this.props.turn)
@@ -169,10 +169,10 @@ class Board extends Component {
     if (validTargets.length === 1) {
       return this.move(validTargets[0], destination)
     } else if (validTargets.length === 0) {
-      this.message.textContent = "That command is not associated with any available moves.";
+      this.props.actions.updateMessage("That command is not associated with any available moves.");
       return false
     } else {
-      this.message.textContent = "That command is associated with multiple targets. Please move manually for now.";
+      this.props.actions.updateMessage("That command is associated with multiple targets. Please move manually for now.");
       return false
     }
   }
@@ -182,7 +182,7 @@ class Board extends Component {
     if (this.props.board.destinationInMoveset(destination, moveset)) {
 
       if (this.props.board.movingIntoCheck(piece, destination, this.props.turn)) {
-        this.message.textContent = "Can't move into check";
+        this.props.actions.updateMessage("Can't move into check");
         return false
       }
 
@@ -198,7 +198,7 @@ class Board extends Component {
       this.setActiveSquare(null)
       this.clearTargetSquares()
 
-      this.message.textContent = ""
+      this.props.actions.updateMessage("")
 
       this.props.actions.updateGameState({
         board: this.props.board,
@@ -211,8 +211,9 @@ class Board extends Component {
       return true 
     }
     else {
-      this.message.textContent = "Not a valid move.";
+      this.props.actions.updateMessage("Not a valid move.");
       this.setActiveSquare(null)
+      this.clearTargetSquares()
       return false
     }
 
@@ -288,16 +289,15 @@ class Board extends Component {
             </div>
           </div>
           <div className="hudWrapper">
-        <h2 ref={message=> {this.message = message }} className="message"> </h2>
-            <Hud message={this.message} executeCommand={this.executeCommand} />
+            <Hud executeCommand={this.executeCommand} />
           </div>
-        </div>
-        {!this.props.playing &&
-          <GameOver startOver={this.startOver} />
-        }
-        <div className="rockets">
-        <object data="rockets.svg" type="image/svg+xml"
-           ref="svg" width="100%" height="100%"></object> 
+          {!this.props.playing &&
+            <GameOver startOver={this.startOver} />
+          }
+          <div className="rockets">
+            <object data="rockets.svg" type="image/svg+xml"
+               ref="svg" width="100%" height="100%"></object> 
+          </div>
         </div>
       </div>
     )
@@ -310,7 +310,8 @@ Board.propTypes = {
   board: PropTypes.object.isRequired,
   turn: PropTypes.oneOf(['white', 'black']).isRequired,
   turnCount: PropTypes.number.isRequired,
-  lastMove: PropTypes.array
+  lastMove: PropTypes.array,
+  message: PropTypes.string
 
 }
 
@@ -323,7 +324,8 @@ function mapStateToProps(state) {
     lastMove: state.gameState.lastMove,
     turnCount: state.gameState.turnCount,
     playing: state.gameState.playing,
-    playerColor: state.playerColor
+    playerColor: state.playerColor,
+    message: state.message
   }
 }
 

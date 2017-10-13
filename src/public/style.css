@@ -123,20 +123,6 @@ h2 {
 	background: rgba(30, 29, 61, 0.53);
 }
 
-.boardWrapper {
-
-}
-
-
-
-.gameContainer h2 {
-	text-align: center;
-	height: 20px;
-	font-size: 2em;
-}
-
-.gameContainer {
-}
 
 .br {
 	border-top-style: solid;
@@ -275,7 +261,6 @@ h1,h2,h3,h4,h5 {
 }
 
 .hud {
-	border: ;
 	float: right;
 	overflow: hidden;
 	background: rgba(30, 29, 61, 0.53);
@@ -323,8 +308,9 @@ h1,h2,h3,h4,h5 {
 	grid-row-end: 2;
 	grid-column-start: 1;
 	grid-column-end: 3;
-
+	padding-bottom: 2em;
 }
+
 
 .voiceCommand {
 	color: white;
@@ -349,6 +335,14 @@ h1,h2,h3,h4,h5 {
 .captured {
 	display: inline;
   height: 1em;
+}
+
+.voice h4 {
+	font-size: 2em;
+}
+
+.message {
+	height: 1em;
 }
 
 .hud.deactivated .voiceCommand {
@@ -379,7 +373,12 @@ h1,h2,h3,h4,h5 {
 		grid-row-end: 3;
 		grid-column-start: 2;
 		grid-column-end: 3;  
+		padding-bottom: 0;
 	}
+
+	.voice h4 {
+		font-size: 1em;
+}	
 
 	.captured {
 		display: -webkit-inline-box;
