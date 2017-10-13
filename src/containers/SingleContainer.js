@@ -35,20 +35,21 @@ class SingleContainer extends Component {
   }
 
   handleChange(e, color) {
-    switch (color) {
-      case "black":
+    if(e.target.value === '') {
+      // if color is black then set state for black to draco 
+      if (color === 'black'){
         this.setState({
-          black: e.target.value
-        });
-        break;
-      case "white":
+          white: 'Harry'
+        }) 
+      } else {
+        // if color is white then set state for white to harry 
         this.setState({
-          white: e.target.value
-        });
-        break;
-      default:
-        break;
-    } 
+          black: 'Draco'
+        })
+      }
+      // escape
+      return
+    }
   }
 
   handleSubmit(e) {

@@ -26,6 +26,7 @@ const paperCard = (props) => (
         <h4> Enter name for {props.color}</h4> 
         <TextField
           hintText={props.value}
+          style={style}
           floatingLabelText={`Player ${props.player}`}
           onChange={(e) => {props.handleChange(e, `${props.color}`)}}
         />
