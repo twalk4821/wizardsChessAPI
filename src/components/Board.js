@@ -288,8 +288,8 @@ class Board extends Component {
             </div>
           </div>
           <div className="hudWrapper">
-      <h2 ref={message=> {this.message = message }} className="message"> </h2>
-            <Hud executeCommand={this.executeCommand} />
+        <h2 ref={message=> {this.message = message }} className="message"> </h2>
+            <Hud message={this.message} executeCommand={this.executeCommand} />
           </div>
         </div>
         {!this.props.playing &&
