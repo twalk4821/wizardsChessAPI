@@ -159,26 +159,52 @@ h2 {
 	text-align: center;
 	display: grid;
 	grid-template-rows: 1fr 1fr;
-	border: 10px solid black;
-	background: grey;
+	border: 1px solid #181737;
+	background: #99dfe2;
+	color: #181737;
 	z-index: 9999;
 	font-family: inherit;
 }
 
 .gameOver h1 {
 	align-self: center;
-	font-size: 40px;
+	font-size: 4em;
+
+}
+
+.winner {
+	align-self: center;
+}
+
+.winner:hover {
+    background: #181737;
+    color: #99dfe2;
+    border: 1px solid #99dfe2;
 }
 
 .gameOver .options {
 	display: inline-grid;
-	grid-template-columns: 1fr 1fr;
-	border: 10px solid gold;
+	/*grid-template-columns: 1fr 1fr;*/
+	/*border: 10px solid gold;*/
 }
 
-.gameOver .options button {
+.gameOver .options > button {
 	font-family: inherit;
-	font-size: 20px;
+  font-size: 2em;
+  background: #181737;
+  color: #9adfe2;
+  border: 3px solid #9adfe2;
+}
+
+.options button a {
+  color: #9adfe2;
+}
+
+.options button {
+  font-family: inherit;
+  font-size: 2em;
+  background: #181737;
+  color: #9adfe2;
 }
 
 /*************SQUARES***************/
@@ -444,4 +470,14 @@ div#root {
     left: 0;
     pointer-events: none;
     z-index: 9999;
+}
+
+
+.gameOver .options > button:hover {
+  background: #9adfe2;
+  color: #181737;
+}
+.winner.options {
+  height: 100%;
+  align-content: center;
 }

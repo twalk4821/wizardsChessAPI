@@ -22,16 +22,21 @@ const GameOver = (props) => {
 	}
 	return (
 		<div className="gameOver">
-			<h1>
-				{displayWinner(props.gameMode)}
-			</h1>
+		  <div className="winner options">
+				<h1>
+					{displayWinner(props.gameMode)}
+				</h1>
+			</div>
 			<div className="options">
 				<button onClick={props.startOver}>
+
 					Play Again?
 				</button>
-				<button>
-					<Link to='/home'>Go back</Link>
-				</button>
+				<Link className="options" to='/home'>
+					<button >
+						Go back
+					</button>
+				</Link>
 			</div>
 		</div>
 	)
