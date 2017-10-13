@@ -132,6 +132,7 @@ h2 {
 .gameContainer h2 {
 	text-align: center;
 	height: 20px;
+	font-size: 2em;
 }
 
 .gameContainer {
@@ -292,6 +293,7 @@ h1,h2,h3,h4,h5 {
 	}
 }
 
+
 .hud-grid {
 	display: grid;
 	grid-template-rows: 1fr 1fr;
@@ -334,8 +336,7 @@ h1,h2,h3,h4,h5 {
 	grid-row-end: 2;
 	grid-column-start: 2;
 	grid-column-end: 3; 
-
-	/* margin-top: 20px; */
+	margin-top: 20px; 
 	font-size: 2em;
 	/*grid-row: 1 / 4;*/
 }
