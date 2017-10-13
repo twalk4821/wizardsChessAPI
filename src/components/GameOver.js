@@ -21,22 +21,24 @@ const GameOver = (props) => {
 		}
 	}
 	return (
-		<div className="gameOver">
-		  <div className="winner options">
-				<h1>
-					{displayWinner(props.gameMode)}
-				</h1>
-			</div>
-			<div className="options">
-				<button onClick={props.startOver}>
+		<div className="modalOverlay">
+			<div className="gameOver">
+			  <div className="winner options">
+					<h1>
+						{displayWinner(props.gameMode)}
+					</h1>
+				</div>
+				<div className="options">
+					<button onClick={props.startOver}>
 
-					Play Again?
-				</button>
-				<Link className="options" to='/home'>
-					<button >
-						Go back
+						Play Again?
 					</button>
-				</Link>
+					<Link className="options" to='/home'>
+						<button >
+							Go back
+						</button>
+					</Link>
+				</div>
 			</div>
 		</div>
 	)

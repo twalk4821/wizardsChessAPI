@@ -150,7 +150,17 @@ h2 {
 	}
 }
 
+.modalOverlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 100vh;
+	width: 100vw;
+	background: rgba(0, 0, 0, 0.75);  
+	z-index: 888;	
+}
 .gameOver {
+	z-index: 8888;
 	position: fixed;
 	left: 25%;
 	top: 25%;
@@ -193,7 +203,13 @@ h2 {
   font-size: 2em;
   background: #181737;
   color: #9adfe2;
-  border: 3px solid #9adfe2;
+  border: 1px solid #9adfe2;
+}
+
+.gameOver .options > button:hover {
+  background: #9adfe2;
+  color: #181737;
+  border: 1px solid #181737;
 }
 
 .options button a {
@@ -473,10 +489,6 @@ div#root {
 }
 
 
-.gameOver .options > button:hover {
-  background: #9adfe2;
-  color: #181737;
-}
 .winner.options {
   height: 100%;
   align-content: center;
