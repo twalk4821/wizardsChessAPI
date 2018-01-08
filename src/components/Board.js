@@ -230,10 +230,6 @@ class Board extends Component {
             </div>
           </div>
           <div className="hudWrapper">
-<<<<<<< HEAD
-      <h2 ref={message=> {this.message = message }} className="message"> </h2>
-            <Hud executeCommand={this.executeCommand} />
-=======
             <Hud executeCommand={this.executeCommand} />
           </div>
           {!this.props.playing &&
@@ -242,7 +238,6 @@ class Board extends Component {
           <div className="rockets">
             <object data="rockets.svg" type="image/svg+xml"
                ref="svg" width="100%" height="100%"></object>
->>>>>>> 2f364d24d2fa496ec3e451632b7f12b0205207b3
           </div>
         </div>
       </div>
@@ -268,14 +263,10 @@ function mapStateToProps(state) {
     board: state.gameState.board,
     turn: state.gameState.turn,
     lastMove: state.gameState.lastMove,
-<<<<<<< HEAD
-    turnCount: state.gameState.turnCount
-=======
     turnCount: state.gameState.turnCount,
     playing: state.gameState.playing,
     playerColor: state.playerColor,
     message: state.message
->>>>>>> 2f364d24d2fa496ec3e451632b7f12b0205207b3
   }
 }
 
