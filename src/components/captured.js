@@ -7,7 +7,7 @@ import PropTypes from 'prop-types'
 const Captured = (props) => {
 	let { capturedWhite, capturedBlack, player } = props
 
-	return player === "white" ?
+	return player === "black" ?
 	(
 		<div className="captured">
 			<ul className="capturedWhite">
