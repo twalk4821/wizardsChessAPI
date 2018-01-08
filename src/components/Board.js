@@ -8,9 +8,11 @@ import PropTypes from 'prop-types'
 import Square from './Square.js'
 import Algebra from './Algebra.js'
 import Hud from '../components/Hud.js'
+import GameOver from '../components/GameOver.js'
 
 import chessBoard from '../classes/board.js'
 import ai from '../classes/ai.js'
+import fireRockets from '../classes/rockets.js'
 
 class Board extends Component {
   constructor(props) {
@@ -182,7 +184,8 @@ class Board extends Component {
         board: this.props.board,
         turn: this.props.turn === "white" ? "black" : "white",
         lastMove: [piece, destination],
-        turnCount: this.props.turn === "black" ? this.props.turnCount + 1 : this.props.turnCount
+        turnCount: this.props.turn === "black" ? this.props.turnCount + 1 : this.props.turnCount,
+        playing: true,
       })
 
       return true
@@ -193,10 +196,19 @@ class Board extends Component {
       this.clearTargetSquares()
       return false
     }
-
-
   }
 
+  startOver = () => {		
+    const board = new chessBoard()		
+    board.init()		
+    this.props.actions.updateGameState({		
+      board: board,		
+      turn: "white",		
+      lastMove: null,		
+      turnCount: 1,		
+      playing: true		
+    })		
+  }
 
   render() {
     var Squares = [];

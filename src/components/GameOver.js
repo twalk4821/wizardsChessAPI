@@ -9,7 +9,6 @@ import PropTypes from 'prop-types';
 const GameOver = (props) => {
 	let winnerColor = props.turn === "white" ? "black" : "white"
 	let winner = props.playerNames[winnerColor]
-		console.log("hello", props.turn, winnerColor)
 	let displayWinner = function(gameMode) {
 		switch (gameMode) {
 			case "single":
