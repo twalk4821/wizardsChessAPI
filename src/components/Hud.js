@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as Actions from '../actions';
 
+import Captured from './Captured.js'
+
 import PropTypes from 'prop-types'
 
 class Hud extends Component {
@@ -94,17 +96,26 @@ class Hud extends Component {
 		return (
 			<div className={classes}>
 				<div className="hud-grid">
-					<div className="hud-left">
-						<h1>{this.props.playerNames[this.props.turn]}</h1>
+					<div className="player whitePlayer">
+						<h1 className="playerName">{this.props.playerNames["white"]}</h1>
 						<h4>Last Move: {this.props.lastMove ? 
 							this.props.lastMove.length === 1 ? this.props.lastMove[0] :
 							this.convertMoveToAlgebraic() : ""}</h4>
 						<h4 className="turn">Turn: {this.props.turnCount}</h4>		
-						<div>{this.state.message}</div>
+						<Captured player="white"/>
 					</div>
-					<div className="hud-right">
+					<div className="player blackPlayer">
+						<h1 className="playerName">{this.props.playerNames["black"]}</h1>
+						<h4>Last Move: {this.props.lastMove ? 
+							this.props.lastMove.length === 1 ? this.props.lastMove[0] :
+							this.convertMoveToAlgebraic() : ""}</h4>
+						<h4 className="turn">Turn: {this.props.turnCount}</h4>		
+						<Captured player="black"/>
+					</div>
+					<div className="voice">
 						{!this.state.recording && 
 							<form onSubmit={this.startRecording}>
+								<div className="message">{this.props.message}</div>
 								<input className="voiceCommand" type="submit" value=""/>
 								<h4>Voice Command</h4>
 							</form>
@@ -114,7 +125,6 @@ class Hud extends Component {
 						}
 					</div>
 				</div>
-				<div></div>
 			</div>
 		)
 	}
@@ -137,7 +147,8 @@ function mapStateToProps(state) {
     board: state.gameState.board,
     turn: state.gameState.turn,
     lastMove: state.gameState.lastMove,
-    turnCount: state.gameState.turnCount
+    turnCount: state.gameState.turnCount,
+    message: state.message
   }
 }
 

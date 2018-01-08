@@ -123,19 +123,6 @@ h2 {
 	background: rgba(30, 29, 61, 0.53);
 }
 
-.boardWrapper {
-
-}
-
-
-
-.gameContainer h2 {
-	text-align: center;
-	height: 20px;
-}
-
-.gameContainer {
-}
 
 .br {
 	border-top-style: solid;
@@ -274,7 +261,6 @@ h1,h2,h3,h4,h5 {
 }
 
 .hud {
-	border: ;
 	float: right;
 	overflow: hidden;
 	background: rgba(30, 29, 61, 0.53);
@@ -292,24 +278,39 @@ h1,h2,h3,h4,h5 {
 	}
 }
 
+
 .hud-grid {
 	display: grid;
-	grid-template-columns: 2fr 1fr;
-	padding: 0em 1em;
+	grid-template-rows: 1fr 1fr;
+	grid-template-columns: 1fr 1fr;
 }
 
-.hud-left {
-	display: flex;
-	flex-direction: column;
+.player {
 	text-align: left;
 }
 
-.hud-left .turn {
-	margin-bottom: 10px;
+.player.blackPlayer {
+	grid-row-start: 2;
+	grid-row-end: 3;
+	grid-column-start: 2;
+	grid-column-end: 3;  
 }
-.captured {
-	display: inline;
+
+.player.whitePlayer {
+	grid-row-start: 2;
+	grid-row-end: 3;
+	grid-column-start: 1;
+	grid-column-end: 2;  
 }
+
+.voice {
+	grid-row-start: 1;
+	grid-row-end: 2;
+	grid-column-start: 1;
+	grid-column-end: 3;
+	padding-bottom: 2em;
+}
+
 
 .voiceCommand {
 	color: white;
@@ -317,32 +318,74 @@ h1,h2,h3,h4,h5 {
 	border-radius: 100%;
 	width: 2em;
 	height: 2em;
-	/* margin-top: 20px; */
+	grid-row-start: 1;
+	grid-row-end: 2;
+	grid-column-start: 2;
+	grid-column-end: 3; 
+	margin-top: 20px; 
 	font-size: 2em;
-	grid-row: 1 / 4;
+	/*grid-row: 1 / 4;*/
 }
 
-color: white;
-background-color: red;
-border-radius: 100%;
-width: 2em;
-height: 2em;
-/* margin-top: 20px; 
-font-size: 2em;
-grid-row: 1 / 4;*/
+.hud h4 {
+	font-size: 1em;
+}
+
+
+.captured {
+	display: inline;
+  height: 1em;
+}
+
+.voice h4 {
+	font-size: 2em;
+}
+
+.message {
+	height: 1em;
+}
 
 .hud.deactivated .voiceCommand {
 	background-color: grey;
 }
 
-.playerName {
-	background-color: black;
-	color: white;
+@media screen and (max-width: 701px) {
+	.player.blackPlayer {
+		grid-row-start: 2;
+		grid-row-end: 3;
+		grid-column-start: 1;
+		grid-column-end: 2;  
+	}
+
+	.player.whitePlayer {
+		grid-row-start: 1;
+		grid-row-end: 2;
+		grid-column-start: 1;
+		grid-column-end: 2;  
+	}
+
+	.player img {
+		width: 2em;
+		height: 2em;
+	}
+	.voice {
+		grid-row-start: 1;
+		grid-row-end: 3;
+		grid-column-start: 2;
+		grid-column-end: 3;  
+		padding-bottom: 0;
+	}
+
+	.voice h4 {
+		font-size: 1em;
+}	
+
+	.captured {
+		display: -webkit-inline-box;
+  	height: 1em;
+	}
 }
 
-.hud-left h2 {
-	text-align: left;
-}
 
 @media (max-width: 450px) {
 	.hud{
