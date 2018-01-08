@@ -98,42 +98,71 @@ h2 {
 	/*grid-gap: 25px*/
 }
 
-@media screen and (max-width: 701px) {
-  .playArea {
-  	grid-template-columns: 1fr;
-  	grid-template-rows: 63vh 37vh;
-  }
-  .board {
-  	height: 63vh;
-  }
-  .hud {
-  	/*top: 63vh;*/
-  	height: 37vh;
-  	/*width: 100vw;*/
-  	/*left: 0;*/
-  }
-
+.boardWrapper {
+	margin: auto;
 }
-
 .board {
-	height: 100%;
+	height: 78vh;
+	width: calc(78vh);
 	display: grid;
-	grid-template-rows: .1fr repeat(8, 1fr);
-	grid-template-columns: .5fr repeat(8, 1fr);
+	grid-template-rows: repeat(8, 9vh) 4vh;
+	grid-template-columns: calc(3vh) repeat(8, calc(9vh));
 	background: rgba(30, 29, 61, 0.53);
 }
 
+.square {
+	width: 100%;
+	height: 100%;
+}
 
 .br {
 	border-top-style: solid;
 }
+@media screen and (max-width: 701px) {
+	.board {
+		height: 63vh;
+		width: calc(63vh);		
+	}
+  .playArea {
+  	grid-template-columns: 1fr;
+		grid-template-rows: 63vh 37vh;
+	}
+	.boardWrapper {
+		margin: auto;
 
+	}
 
-@media (min-width: 501px) {
-	.playArea{
+	.hudWrapper {
+		width: 100vw;
+	}
+  .hud {
+		height: 33vh;
+		width: 100%;
+  }
+
+}
+
+@media screen and (max-width: 702px) {
+	.boardWrapper {
+		margin: 0;
 	}
 	.board {
-		padding-right: 20px;
+		height: 68vh;
+		width: calc(68vh);
+		position: relative;
+		left: calc((100vw - 68vh)/2);
+		grid-template-columns: calc(4vh) repeat(8, calc(9vh)) ;
+		grid-template-rows: repeat(8, 8vh) 4vh;
+	}
+}
+
+@media screen and (max-width: 500px) {
+	.board {
+		height: calc(86vw);
+		width: 86vw;
+		left: 7vw;
+		grid-template-columns: 4vw repeat(8, 10vw) ;
+		grid-template-rows: repeat(8, calc(10vw)) calc(4vw);
 	}
 }
 
@@ -387,9 +416,11 @@ h1,h2,h3,h4,h5 {
 }
 
 
-@media (max-width: 450px) {
+@media (max-width: 701px) {
 	.hud{
 		width: 100%;
+		position: relative;
+		top: 4vh;
 	}
 }
 
