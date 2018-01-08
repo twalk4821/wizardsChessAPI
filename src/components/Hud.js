@@ -87,35 +87,44 @@ class Hud extends Component {
 		return `${piece.type} to ${String.fromCharCode(65 + destination.x)}${destination.y+1}`
 	}
 
+	renderLastMove() {
+		const { playerNames, turn, lastMove } = this.props;
+		if (!lastMove || lastMove.length === 0) return ''
+		;
+		const playerLastMoved = turn === "white" ? playerNames["black"] : playerNames["white"];
+		return (
+			<h4 className="last-move">
+				{playerLastMoved} moved { lastMove.length === 1 ? lastMove[0] : this.convertMoveToAlgebraic() }
+			</h4>
+		);
+	}
+
 	render() {
 		const classes = "hud" + (this.props.gameMode === "single" && 
 								 this.props.turn === "black" ?
 								 " deactivated" :
-								 "")
+								 "");
+		
+		const { playerNames, turn, lastMove, turnCount, message } = this.props;
 		
 		return (
 			<div className={classes}>
+				{this.renderLastMove()}
+				<h2>{playerNames[turn]}'s turn</h2>
+				<h5 className="turn">Turn: {turnCount}</h5>	
 				<div className="hud-grid">
 					<div className="player whitePlayer">
-						<h1 className="playerName">{this.props.playerNames["white"]}</h1>
-						<h4>Last Move: {this.props.lastMove ? 
-							this.props.lastMove.length === 1 ? this.props.lastMove[0] :
-							this.convertMoveToAlgebraic() : ""}</h4>
-						<h4 className="turn">Turn: {this.props.turnCount}</h4>		
+						<h1 className="playerName">{playerNames["white"]}</h1>
 						<Captured player="white"/>
 					</div>
 					<div className="player blackPlayer">
-						<h1 className="playerName">{this.props.playerNames["black"]}</h1>
-						<h4>Last Move: {this.props.lastMove ? 
-							this.props.lastMove.length === 1 ? this.props.lastMove[0] :
-							this.convertMoveToAlgebraic() : ""}</h4>
-						<h4 className="turn">Turn: {this.props.turnCount}</h4>		
+						<h1 className="playerName">{playerNames["black"]}</h1>	
 						<Captured player="black"/>
 					</div>
 					<div className="voice">
 						{!this.state.recording && 
 							<form onSubmit={this.startRecording}>
-								<div className="message">{this.props.message}</div>
+								<div className="message">{message}</div>
 								<input className="voiceCommand" type="submit" value=""/>
 								<h4>Voice Command</h4>
 							</form>
