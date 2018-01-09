@@ -426,6 +426,35 @@ h1,h2,h3,h4,h5 {
 
 /***************** MAIN MENU **************/
 
+
+.homeContainer {
+	height: 100vh;
+	width: 100vw;
+	position: fixed;
+}
+
+.homeContainerItem {
+	flex: auto;
+	width: 100vw;
+	height: 100%;
+	display: block;
+}
+
+.homeContainerHeader {
+	height: 30vh;
+	width: 100vw;
+}
+
+.homeContainerHeader h1.App-header {
+	position: relative;
+	top: 5vh;	
+}
+
+.homeContainerMenu {
+	height: 70vh;
+	width: 100vw;
+}
+
 .mainMenu {
 	width: 80vw;
 	height: 95%;
@@ -463,8 +492,7 @@ h1,h2,h3,h4,h5 {
 @media screen and (max-width: 600px) {
 	.homeContainerHeader h1.App-header {
 		font-size: 16vw;
-		position: relative;
-		top: 15vh;
+		top: 10vh;
 	}
 }
 
@@ -473,34 +501,54 @@ h1,h2,h3,h4,h5 {
   background: rgba(154, 223, 226, 0.80);
   color: #181737;
   -webkit-text-stroke: 2.5px #99dfe2;
-  }
+}
 
+/*******************START GAME********************/
+
+.singleContainer, .localContainer {
+	height: 100vh;
+}
+
+.startGameHeader {
+	height: 25vh;
+}
+
+.startGameHeader h1.App-header {
+	position: relative;
+	top: 5vh;
+}
+
+@media screen and (max-width: 600px) {
+	.startGameHeader h1.App-header {
+		font-size: 15vw;
+		top: calc(15vw/2 + 5vh);
+	}
+}
 .formFlexbox {
-	background: rgba(24, 23, 55, 0.8);
-	position: absolute;
-	top: 20vh;
-	left: 10vh;
 	width: 80vw;
-	margin: 0 auto;
 	height: 70vh;
+	position: relative;
+	top: 2.5vh;
+	left: 10vw;
 	display: flex;
 	flex-direction: column;
-	display: block;
 	color: white;
-	display: -webkit-box;
-	display: -moz-box;
-	display: -webkit-flex;
-	display: -ms-flexbox;
-	display: flex;
 	color: #eafcef;
+	background: rgba(24, 23, 55, 0.8);
 }
 
 .formFlexitem {
-	flex: auto;
-  /*font-size: 1.5em;*/
+	height: 17.5vh;
+	font-size: 2vmin;
   font-family: 'Germania One', cursive;
   -webkit-text-stroke: 0.5px #03020f;
-  text-stroke: 0.5px #03020f;
+}
+
+@media screen and (max-width: 475px) {
+	.formFlexitem {
+		font-size: 2.5vmin;
+		justify-content: center;
+	}
 }
 input.formFlexitem.formFlexButton {
   background: #181737;
@@ -514,38 +562,6 @@ input.formFlexitem.formFlexButton:hover {
 	color: #181737;
 }
 
-.homeContainer {
-	height: 100vh;
-	width: 100vw;
-	position: fixed;
-}
-
-.homeContainerItem {
-	flex: auto;
-	width: 100vw;
-	height: 100%;
-	display: block;
-}
-
-.homeContainerHeader {
-	height: 30vh;
-	width: 100vw;
-}
-
-.homeContainerMenu {
-	height: 70vh;
-	width: 100vw;
-}
-
-h1.App-header {
-  top: 5vh;
-  position: relative;
-}
-
-h1.App-header:hover {
-  transition: 0.2s ease;
-  size: 5em;
-}
 
 div#root {
   position: relative;
