@@ -95,18 +95,17 @@ h2 {
 	width: 100vw;
 	display: grid;
 	grid-template-columns: 63vw 37vw;
-	/*grid-gap: 25px*/
 }
 
-.boardWrapper {
-	margin: auto;
-}
 .board {
-	height: 78vh;
-	width: calc(78vh);
+	height: 63vmin;
+	width: 63vmin;
+	position: relative;
+	top: calc((100vh - 63vmin)/2);
+	left: calc((63vw - 63vmin)/2);
 	display: grid;
-	grid-template-rows: repeat(8, 9vh) 4vh;
-	grid-template-columns: calc(3vh) repeat(8, calc(9vh));
+	grid-template-rows: repeat(8, 7.5vmin) 3vmin;
+	grid-template-columns: 3vmin repeat(8, calc(7.5vmin));
 	background: rgba(30, 29, 61, 0.53);
 }
 
@@ -118,51 +117,28 @@ h2 {
 .br {
 	border-top-style: solid;
 }
+
 @media screen and (max-width: 701px) {
-	.board {
-		height: 63vh;
-		width: calc(63vh);		
-	}
   .playArea {
   	grid-template-columns: 1fr;
 		grid-template-rows: 63vh 37vh;
 	}
-	.boardWrapper {
-		margin: auto;
 
-	}
-
-	.hudWrapper {
-		width: 100vw;
-	}
-  .hud {
-		height: 33vh;
-		width: 100%;
-  }
-
-}
-
-@media screen and (max-width: 702px) {
-	.boardWrapper {
-		margin: 0;
-	}
 	.board {
-		height: 68vh;
-		width: calc(68vh);
-		position: relative;
-		left: calc((100vw - 68vh)/2);
-		grid-template-columns: calc(4vh) repeat(8, calc(9vh)) ;
-		grid-template-rows: repeat(8, 8vh) 4vh;
+		top: calc((63vh - 63vmin)/2);
+		left: calc((100vw - 63vmin)/2);
 	}
 }
 
-@media screen and (max-width: 500px) {
+
+@media screen and (max-width: 450px) {
 	.board {
-		height: calc(86vw);
-		width: 86vw;
-		left: 7vw;
-		grid-template-columns: 4vw repeat(8, 10vw) ;
-		grid-template-rows: repeat(8, calc(10vw)) calc(4vw);
+		width: 80vw;
+		height: calc(80vw);
+		top: calc((63vh - 80vw)/2);
+		left: 5vw;
+		grid-template-rows: repeat(8, calc(9.625vw)) calc(3vw);
+		grid-template-columns: 3vw repeat(8, 9.625vw);
 	}
 }
 
@@ -210,8 +186,6 @@ h2 {
 
 .gameOver .options {
 	display: inline-grid;
-	/*grid-template-columns: 1fr 1fr;*/
-	/*border: 10px solid gold;*/
 }
 
 .gameOver .options > button {
@@ -275,12 +249,9 @@ h2 {
 
 /*ALGEBRA*/
 .algebra {
-	/*line-height: 3;*/
 	color: white;
-	/*font-size: 2em;*/
   font-family: 'Germania One', cursive;
   -webkit-text-stroke: 0.5px #03020f;
-  text-stroke: 0.5px #03020f;
 }
 
 /*****************HUD********************/
@@ -290,6 +261,7 @@ h1,h2,h3,h4,h5 {
 }
 
 .hud {
+	height: 100%;
 	float: right;
 	overflow: hidden;
 	background: rgba(30, 29, 61, 0.53);
@@ -297,16 +269,7 @@ h1,h2,h3,h4,h5 {
 	font-size: 1.5em;
 	font-family: 'Germania One', cursive;
 	-webkit-text-stroke: 0.5px #03020f;
-	text-stroke: 0.5px #03020f;
-	/*padding: 0.5em;*/
 }
-
-@media screen and (max-width: 701px) {
-	.hud {
-		font-size: 1em;
-	}
-}
-
 
 .hud-grid {
 	display: grid;
@@ -353,11 +316,10 @@ h1,h2,h3,h4,h5 {
 	grid-column-end: 3; 
 	margin-top: 20px; 
 	font-size: 2em;
-	/*grid-row: 1 / 4;*/
 }
 
 .hud h4 {
-	font-size: 1em;
+	font-size: 3vh;
 }
 
 
@@ -378,7 +340,16 @@ h1,h2,h3,h4,h5 {
 	background-color: grey;
 }
 
+/**************CAPTURED RESPONSIVE****************/
+
 @media screen and (max-width: 701px) {
+	.hud {
+		font-size: 1em;
+		width: 100%;
+		height: 37vh;
+		font-size: 2.5vh;
+	}
+
 	.player.blackPlayer {
 		grid-row-start: 2;
 		grid-row-end: 3;
@@ -397,6 +368,7 @@ h1,h2,h3,h4,h5 {
 		width: 2em;
 		height: 2em;
 	}
+
 	.voice {
 		grid-row-start: 1;
 		grid-row-end: 3;
@@ -407,20 +379,11 @@ h1,h2,h3,h4,h5 {
 
 	.voice h4 {
 		font-size: 1em;
-}	
+	}	
 
 	.captured {
 		display: -webkit-inline-box;
   	height: 1em;
-	}
-}
-
-
-@media (max-width: 701px) {
-	.hud{
-		width: 100%;
-		position: relative;
-		top: 4vh;
 	}
 }
 
@@ -522,6 +485,7 @@ h1,h2,h3,h4,h5 {
 	.startGameHeader h1.App-header {
 		font-size: 15vw;
 		top: calc(15vw/2 + 5vh);
+
 	}
 }
 .formFlexbox {
